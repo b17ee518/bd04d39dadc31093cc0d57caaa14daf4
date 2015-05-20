@@ -1,0 +1,59 @@
+﻿<ControlBase:KWindowBase 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:KanPlayWPF.Views"
+        xmlns:vm="clr-namespace:KanPlayWPF.ViewModels"
+        xmlns:ControlBase="clr-namespace:KanPlayWPF.ControlBase" x:Class="KanPlayWPF.Views.MainWindow"
+        Title="MainWindow" Height="500" Width="800"
+        Style="{StaticResource KMainWindowStyle}" ResizeMode="CanMinimize">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+
+        <ControlBase:KTitleFrame Height="20" VerticalAlignment="Top" Width="800" MinHeight="20" MaxHeight="20" Background="{StaticResource TitleBrush}"/>
+        
+        <Button Content="X" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Click="onCloseButtonClicked"/>
+        <Button Content="-" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top" Click="onMinimumButtonClicked"/>
+
+        <ToggleButton Content="武"
+                      x:Name="btnWeapon"
+                      IsChecked="False"
+                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,80,0" VerticalAlignment="Top" Click="onWeaponToggleClicked"/>
+        <ToggleButton Content="時"
+                      x:Name="btnTimer"
+                      IsChecked="True"
+                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,120,0" VerticalAlignment="Top" Click="onTimerToggleClicked"/>
+        <ToggleButton Content="情"
+                      x:Name="btnInfo"
+                      IsChecked="True"
+                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,140,0" VerticalAlignment="Top" Click="onInfoToggleClicked"/>
+
+
+    </Grid>
+</ControlBase:KWindowBase>
