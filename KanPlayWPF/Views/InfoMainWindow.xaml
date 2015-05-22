@@ -12,7 +12,8 @@
     x:Class="KanPlayWPF.Views.InfoMainWindow"
         Title="InfoMainWindow" Height="224" Width="320"
     Style="{StaticResource KMainWindowStyle}" MinWidth="320" MinHeight="224" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
-    ShowInTaskbar="False">
+    ShowInTaskbar="False"
+    Loaded="KWindowBase_Loaded">
 
     <ControlBase:KWindowBase.DataContext>
         <vm:InfoMainWindowViewModel/>
@@ -44,14 +45,16 @@
             <ControlBase:KTitleFrame Height="20" VerticalAlignment="Top" MinHeight="20" MaxHeight="20" MinWidth="320" Background="{StaticResource TitleBrush}">
                 <Button Content="X" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Click="onCloseButtonClicked"/>
             </ControlBase:KTitleFrame>
-            <InfoMainWindowControls:KOverviewTable VerticalAlignment="Top"/>
+            <InfoMainWindowControls:KOverviewTable x:Name="overviewTable" VerticalAlignment="Top"/>
 
-            <KFoldableListView:KFoldableListView x:Name="missionTable"  Margin="0" MinWidth="320" MinHeight="25"/>
-            <KFoldableListView:KFoldableListView Margin="0" MinWidth="320" MinHeight="25"/>
-            <KFoldableListView:KFoldableListView Margin="0" MinWidth="320" MinHeight="25"/>
-            <KFoldableListView:KFoldableListView Margin="0" MinWidth="320" MinHeight="25"/>
-            <KFoldableListView:KFoldableListView Margin="0" MinWidth="320" MinHeight="25"/>
-            <KFoldableListView:KFoldableListView Margin="0" MinWidth="320" MinHeight="25"/>
+            <KFoldableListView:KFoldableListView 
+                x:Name="missionTable" 
+                Margin="0" MinWidth="320" MinHeight="25"/>
+            <KFoldableListView:KFoldableListView x:Name="fleetTable_1" Margin="0" MinWidth="320" MinHeight="25"/>
+            <KFoldableListView:KFoldableListView x:Name="fleetTable_2" Margin="0" MinWidth="320" MinHeight="25"/>
+            <KFoldableListView:KFoldableListView x:Name="fleetTable_3" Margin="0" MinWidth="320" MinHeight="25"/>
+            <KFoldableListView:KFoldableListView x:Name="fleetTable_4" Margin="0" MinWidth="320" MinHeight="25"/>
+            <KFoldableListView:KFoldableListView x:Name="repairTable" Margin="0" MinWidth="320" MinHeight="25"/>
         </StackPanel>
 
     </Grid>

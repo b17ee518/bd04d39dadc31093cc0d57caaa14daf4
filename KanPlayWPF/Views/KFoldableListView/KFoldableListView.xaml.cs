@@ -33,6 +33,7 @@ namespace KanPlayWPF.Views.KFoldableListView
         public KFoldableListView()
         {
             InitializeComponent();
+            toggleButton.IsChecked = true;
 
             foldableListView.SizeChanged += foldableListView_SizeChanged;
             /*
@@ -57,12 +58,13 @@ namespace KanPlayWPF.Views.KFoldableListView
 
         void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (_expandableColumn >= 0 && _expandableColumn < columnsGridView.Columns.Count)
+            GridView gv = foldableListView.View as GridView;
+            if (_expandableColumn >= 0 && _expandableColumn < gv.Columns.Count)
             {
                 Double totalWidth = foldableListView.ActualWidth;
                 Double othersWidth = 0;
 
-                foreach (var item in columnsGridView.Columns.Select((v, i) => new { v, i }))
+                foreach (var item in gv.Columns.Select((v, i) => new { v, i }))
                 {
                     if (item.i != _expandableColumn)
                     {
@@ -70,7 +72,11 @@ namespace KanPlayWPF.Views.KFoldableListView
                     }
                 }
 
-                columnsGridView.Columns[_expandableColumn].Width = totalWidth - othersWidth - columnsGridView.Columns.Count - 8;
+                Double adjustWidth = totalWidth - othersWidth - gv.Columns.Count - 8;
+                if (gv.Columns[_expandableColumn].ActualWidth < adjustWidth)
+                {
+                    gv.Columns[_expandableColumn].Width = adjustWidth;
+                }
             }
             (sender as DispatcherTimer).Stop();
         }
@@ -90,20 +96,26 @@ namespace KanPlayWPF.Views.KFoldableListView
             foldableListView.Visibility = Visibility.Visible;
         }
 
+        public void applyTableStyle(string resourceName)
+        {
+            foldableListView.Style = (Application.Current.FindResource(resourceName) as Style);
+        }
+
         public void setItemSource(System.Collections.IEnumerable source)
         {
             foldableListView.ItemsSource = source;
         }
-        
-        public void addColumn(Binding bind)
-        {
-            columnsGridView.Columns.Add(new GridViewColumn() { DisplayMemberBinding = bind });
-            //columnsGridView.Columns.Add(new GridViewColumn() { DisplayMemberBinding = new Binding() { Path = new PropertyPath("Name") } });
-        }
 
-        public void setTitleBinding(Binding bind)
+        public void setTitleBinding(BindingBase bind)
         {
             toggleButton.Content = bind;
+        }
+
+        public void setTitleBinding(BindingBase contentBind, BindingBase foregroundBind, BindingBase backgroundBind)
+        {
+            toggleButton.Content = contentBind;
+            BindingOperations.SetBinding(toggleButton.Foreground, SolidColorBrush.ColorProperty, foregroundBind);
+            BindingOperations.SetBinding(toggleButton.Background, SolidColorBrush.ColorProperty, backgroundBind);
         }
 
         private int _expandableColumn = -1;
@@ -111,5 +123,69 @@ namespace KanPlayWPF.Views.KFoldableListView
         {
             _expandableColumn = index;
         }
+
+        public void setFold(bool bFold)
+        {
+            toggleButton.IsChecked = !bFold;
+        }
+
+        #region eliminateMargin
+        private void ListViewItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListViewItem lvi = sender as ListViewItem;
+            GridViewRowPresenter gvrp = FindVisualChild<GridViewRowPresenter>(lvi);
+            IEnumerable<ContentPresenter> cps = FindVisualChildren<ContentPresenter>(gvrp);
+            foreach (var cp in cps)
+            {
+                cp.Margin = new Thickness(0);
+            }
+        }
+
+        private T FindVisualChild<T>(Visual visual) where T : Visual
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(visual); i++)
+            {
+                Visual child = (Visual)VisualTreeHelper.GetChild(visual, i);
+                if (child != null)
+                {
+                    T correctlyTyped = child as T;
+                    if (correctlyTyped != null)
+                    {
+                        return correctlyTyped;
+                    }
+
+                    T descendent = FindVisualChild<T>(child);
+                    if (descendent != null)
+                    {
+                        return descendent;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+        #endregion
+
     }
 }

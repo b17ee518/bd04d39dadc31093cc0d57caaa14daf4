@@ -25,7 +25,9 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0">
+                                    <TextBlock 
+                                        Grid.Row="0"
+                                        TextBlock.Foreground="{Binding kanCountColorBrush}">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="所有艦娘数: {0}/{1}">
                                                 <Binding Path="kanCount"></Binding>
@@ -34,7 +36,8 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                     <TextBlock Grid.Row="1" Text="{Binding instantRepairCount, StringFormat=高速修復材: {0}}"/>
-                                    <TextBlock Grid.Row="2">
+                                    <TextBlock 
+                                        Grid.Row="2">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="提督Lv. {0}(次:{1})">
                                                 <Binding Path="playerLevel"></Binding>
@@ -56,7 +59,9 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0">
+                                    <TextBlock 
+                                        Grid.Row="0"
+                                        TextBlock.Foreground="{Binding slotitemCountColorBrush}">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="所有装備数: {0}/{1}">
                                                 <Binding Path="slotitemCount"></Binding>

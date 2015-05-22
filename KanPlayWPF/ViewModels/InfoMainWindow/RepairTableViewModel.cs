@@ -16,7 +16,7 @@ using System.Windows.Media;
 
 namespace KanPlayWPF.ViewModels.InfoMainWindow
 {
-    public class KOverviewTableViewModel : ViewModel
+    public class RepairTableViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -60,235 +60,250 @@ namespace KanPlayWPF.ViewModels.InfoMainWindow
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-        public KOverviewTableViewModel()
+        public RepairTableViewModel()
         {
             Initialize();
         }
         public void Initialize()
         {
-            kanCount = -1;
-            kanMaxCount = -1;
-            slotitemCount = -1;
-            slotitemMaxCount = -1;
-            instantRepairCount = -1;
-            instantBuildCount = -1;
-            playerLevel = -1;
-            playerExpNext = -1;
-            furnitureCoin = -1;
+            shipName = "-";
+            level = -1;
+            cond = -1;
+            nowHp = -1;
+            maxHp = -1;
+            repairTime = -1;
 
-            this.PropertyChanged += KOverviewTableViewModel_PropertyChanged;
-//             kanCountColorBrush = BrushModel.getWhiteColorBrush();
-//             slotitemCountColorBrush = BrushModel.getWhiteColorBrush();
-
+            this.PropertyChanged += RepairTableViewModel_PropertyChanged;
+//             hpColorBrush = BrushModel.getWhiteColorBrush();
+//             kanColorBrush = BrushModel.getWhiteColorBrush();
         }
 
-        void KOverviewTableViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        void RepairTableViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "kanCount" || e.PropertyName == "kanMaxCount")
+            if (e.PropertyName == "cond")
             {
-                TextBrushType type = TextBrushType.White;
-                if (kanCount < kanMaxCount -5)
-                {
-                    type = TextBrushType.Orange;
-                }
-                kanCountColorBrush = BrushModel.getTextColorStaticResource(type);
+                condState = CondModel.getCondStateFromCond(this.cond);
             }
-            else if (e.PropertyName == "slotitemCount" || e.PropertyName == "slotitemMaxCount")
+            else if (e.PropertyName == "condState")
             {
-                TextBrushType type = TextBrushType.White;
-                if (slotitemCount < slotitemMaxCount - 20)
-                {
-                    type = TextBrushType.Orange;
-                }
-                slotitemCountColorBrush = BrushModel.getTextColorStaticResource(type);
+                kanColorBrush = CondModel.getCondColorBrushFromCondState(condState);
+            }
+            else if (e.PropertyName == "nowHp" || e.PropertyName == "maxHp")
+            {
+                woundState = WoundModel.getWoundStateFromHP(this.nowHp, this.maxHp);
+            }
+            else if (e.PropertyName == "woundState")
+            {
+                hpColorBrush = WoundModel.getWoundColorBrushFromWoundState(this.woundState);
+                stateString = WoundModel.getStateStringFromWoundState(this.woundState);
+            }
+            else if (e.PropertyName == "repairTime")
+            {
+                repairTimeString = TimeStringConvertModel.convertMSToString(repairTime);
             }
         }
-
-
-        #region kanCount変更通知プロパティ
-        private int _kanCount;
-
-        public int kanCount
-        {
-            get
-            { return _kanCount; }
-            set
-            { 
-                if (_kanCount == value)
-                    return;
-                _kanCount = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region kanMaxCount変更通知プロパティ
-        private int _kanMaxCount;
-
-        public int kanMaxCount
-        {
-            get
-            { return _kanMaxCount; }
-            set
-            { 
-                if (_kanMaxCount == value)
-                    return;
-                _kanMaxCount = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
         
-        #region slotitemCount変更通知プロパティ
-        private int _slotitemCount;
+        #region shipName変更通知プロパティ
+        private string _shipName;
 
-        public int slotitemCount
+        public string shipName
         {
             get
-            { return _slotitemCount; }
+            { return _shipName; }
             set
             { 
-                if (_slotitemCount == value)
+                if (_shipName == value)
                     return;
-                _slotitemCount = value;
+                _shipName = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region slotitemMaxCount変更通知プロパティ
-        private int _slotitemMaxCount;
+        #region level変更通知プロパティ
+        private int _level;
 
-        public int slotitemMaxCount
+        public int level
         {
             get
-            { return _slotitemMaxCount; }
+            { return _level; }
             set
             { 
-                if (_slotitemMaxCount == value)
+                if (_level == value)
                     return;
-                _slotitemMaxCount = value;
+                _level = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region instantRepairCount変更通知プロパティ
-        private int _instantRepairCount;
+        #region cond変更通知プロパティ
+        private int _cond;
 
-        public int instantRepairCount
+        public int cond
         {
             get
-            { return _instantRepairCount; }
+            { return _cond; }
             set
             { 
-                if (_instantRepairCount == value)
+                if (_cond == value)
                     return;
-                _instantRepairCount = value;
+                _cond = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region instantBuildCount変更通知プロパティ
-        private int _instantBuildCount;
+        #region repairTime変更通知プロパティ
+        private Int64 _repairTime;
 
-        public int instantBuildCount
+        public Int64 repairTime
         {
             get
-            { return _instantBuildCount; }
+            { return _repairTime; }
             set
             { 
-                if (_instantBuildCount == value)
+                if (_repairTime == value)
                     return;
-                _instantBuildCount = value;
+                _repairTime = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region playerLevel変更通知プロパティ
-        private int _playerLevel;
+        #region nowHp変更通知プロパティ
+        private int _nowHp;
 
-        public int playerLevel
+        public int nowHp
         {
             get
-            { return _playerLevel; }
+            { return _nowHp; }
             set
             { 
-                if (_playerLevel == value)
+                if (_nowHp == value)
                     return;
-                _playerLevel = value;
+                _nowHp = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region playerExpNext変更通知プロパティ
-        private int _playerExpNext;
+        #region maxHp変更通知プロパティ
+        private int _maxHp;
 
-        public int playerExpNext
+        public int maxHp
         {
             get
-            { return _playerExpNext; }
+            { return _maxHp; }
             set
             { 
-                if (_playerExpNext == value)
+                if (_maxHp == value)
                     return;
-                _playerExpNext = value;
+                _maxHp = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region furnitureCoin変更通知プロパティ
-        private int _furnitureCoin;
-
-        public int furnitureCoin
-        {
-            get
-            { return _furnitureCoin; }
-            set
-            { 
-                if (_furnitureCoin == value)
-                    return;
-                _furnitureCoin = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        ///// 
+        ////
         
-        #region kanCountColorBrush変更通知プロパティ
-        private SolidColorBrush _kanCountColorBrush;
+        #region woundState変更通知プロパティ
+        private WoundState _woundState;
 
-        public SolidColorBrush kanCountColorBrush
+        public WoundState woundState
         {
             get
-            { return _kanCountColorBrush; }
+            { return _woundState; }
             set
-            { 
-                if (_kanCountColorBrush == value)
+            {
+                if (_woundState == value)
                     return;
-                _kanCountColorBrush = value;
+                _woundState = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region slotitemCountColorBrush変更通知プロパティ
-        private SolidColorBrush _slotitemCountColorBrush;
+        #region condState変更通知プロパティ
+        private CondState _condState;
 
-        public SolidColorBrush slotitemCountColorBrush
+        public CondState condState
         {
             get
-            { return _slotitemCountColorBrush; }
+            { return _condState; }
             set
-            { 
-                if (_slotitemCountColorBrush == value)
+            {
+                if (_condState == value)
                     return;
-                _slotitemCountColorBrush = value;
+                _condState = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region stateString変更通知プロパティ
+        private string _stateString;
+
+        public string stateString
+        {
+            get
+            { return _stateString; }
+            set
+            {
+                if (_stateString == value)
+                    return;
+                _stateString = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region hpColorBrush変更通知プロパティ
+        private SolidColorBrush _hpColorBrush;
+
+        public SolidColorBrush hpColorBrush
+        {
+            get
+            { return _hpColorBrush; }
+            set
+            {
+                if (_hpColorBrush == value)
+                    return;
+                _hpColorBrush = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region kanColorBrush変更通知プロパティ
+        private SolidColorBrush _kanColorBrush;
+
+        public SolidColorBrush kanColorBrush
+        {
+            get
+            { return _kanColorBrush; }
+            set
+            {
+                if (_kanColorBrush == value)
+                    return;
+                _kanColorBrush = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region repairTimeString変更通知プロパティ
+        private string _repairTimeString;
+
+        public string repairTimeString
+        {
+            get
+            { return _repairTimeString; }
+            set
+            {
+                if (_repairTimeString == value)
+                    return;
+                _repairTimeString = value;
                 RaisePropertyChanged();
             }
         }

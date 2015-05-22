@@ -1,0 +1,266 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:infoMainVM="clr-namespace:KanPlayWPF.ViewModels.InfoMainWindow">
+
+    <System:Double x:Key="listViewOneCharSize">18</System:Double>
+
+    <Style 
+        x:Key="KMissionTableToggleButtonDefine"
+        TargetType="{x:Type ToggleButton}"
+        BasedOn="{StaticResource KToggleButtonStyle}"
+        x:Shared="False">
+        <Setter Property="Content" Value="{Binding missionCount}"/>
+        <Setter Property="ContentStringFormat" Value="遂行中任務({0})"/>
+    </Style>
+
+    <Style 
+        x:Key="KFleetTableToggleButtonDefine"
+        TargetType="{x:Type ToggleButton}"
+        BasedOn="{StaticResource KToggleButtonStyle}"
+        x:Shared="False">
+
+        <Setter Property="Content">
+            <Setter.Value>
+                <TextBlock Foreground="{Binding titleColorBrush}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}(Lv計:{1} 制空:{2} 索敵:{3}[{4}])">
+                            <Binding Path="fleetName"/>
+                            <Binding Path="level"/>
+                            <Binding Path="seiku"/>
+                            <Binding Path="sakuteki"/>
+                            <Binding Path="sakutekiCalced"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Mission Table-->
+    <Style 
+        x:Key="KMissionTableListViewDefine"
+        TargetType="{x:Type ListView}"
+        BasedOn="{StaticResource {x:Type ListView}}" 
+        x:Shared="False">
+        
+        <Setter Property="View">
+            <Setter.Value>
+                <GridView>
+                    <!-- "-" -->
+                    <GridViewColumn DisplayMemberBinding="{Binding prefix}">
+                    </GridViewColumn>
+                    <!-- "missionName" -->
+                    <GridViewColumn DisplayMemberBinding="{Binding missionName}">
+                    </GridViewColumn>
+                    <!-- "progress" -->
+                    <GridViewColumn DisplayMemberBinding="{Binding StringFormat=({0}%), Path=progress}">
+                    </GridViewColumn>
+                </GridView>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Fleet Table-->
+    <Style 
+        x:Key="KFleetTableListViewDefine"
+        TargetType="{x:Type ListView}"
+        BasedOn="{StaticResource {x:Type ListView}}"
+        x:Shared="False">
+
+        <Setter Property="View">
+            <Setter.Value>
+                <GridView>
+                    <!-- "index" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding StringFormat={}{0}:, Path=index}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "shipName" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding shipName}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "level" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding StringFormat=Lv.{0}, Path=level}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "cond" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding StringFormat=({0}), Path=cond}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "nextExp" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding StringFormat=次{0}:, Path=nextExp}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "fuel" -->
+                    <GridViewColumn Width="{StaticResource listViewOneCharSize}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="燃"
+                                    Foreground="{Binding fuelColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "bullet" -->
+                    <GridViewColumn Width="{StaticResource listViewOneCharSize}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="弾"
+                                    Foreground="{Binding bulletColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "nowHp/maxHp" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding hpColorBrush}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="({0}/{1})">
+                                            <Binding Path="nowHp"/>
+                                            <Binding Path="maxHp"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "stateString" -->
+                    <GridViewColumn Width="{StaticResource listViewOneCharSize}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding stateString}"
+                                    Foreground="{Binding hpColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Repair Table-->
+    <Style 
+        x:Key="KRepairTableListViewDefine"
+        TargetType="{x:Type ListView}"
+        BasedOn="{StaticResource {x:Type ListView}}"
+        x:Shared="False">
+
+        <Setter Property="View">
+            <Setter.Value>
+                <GridView>
+                    <!-- "shipName" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding shipName}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "level" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding StringFormat=Lv.{0}, Path=level}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "cond" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding StringFormat=({0}), Path=cond}"
+                                    Foreground="{Binding kanColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "repairTime" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding repairTimeString}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "nowHp/maxHp" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding hpColorBrush}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="({0}/{1})">
+                                            <Binding Path="nowHp"/>
+                                            <Binding Path="maxHp"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!-- "stateString" -->
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding stateString}"
+                                    Foreground="{Binding hpColorBrush}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

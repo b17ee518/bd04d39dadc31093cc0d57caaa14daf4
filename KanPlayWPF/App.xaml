@@ -7,11 +7,15 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                
-                <ResourceDictionary Source="Styles/ColorAndBrushes.xaml" />
-                <ResourceDictionary Source="Styles/ControlStyles.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/Styles/ColorAndBrushes.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/ControlStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/TableDefines.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
+
+            
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

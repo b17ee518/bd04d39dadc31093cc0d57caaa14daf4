@@ -12,10 +12,13 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using KanPlayWPF.Models;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Media;
 
-namespace KanPlayWPF.ViewModels
+namespace KanPlayWPF.ViewModels.InfoMainWindow
 {
-    public class InfoMainWindowViewModel : ViewModel
+    public class FleetTeamViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -59,41 +62,154 @@ namespace KanPlayWPF.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
-        public void Initialize()
+
+        public FleetTeamViewModel()
         {
+            shipsViewModel = new List<FleetTableViewModel>();
+            Initialize();
         }
 
+        public List<FleetTableViewModel> shipsViewModel { get; set; }
+        public void Initialize()
+        {
+            fleetName = "";
+            level = -1;
+            seiku = -1;
+            sakuteki = -1;
+            sakutekiCalced = -1;
 
-        #region infoTitleText変更通知プロパティ
-        private string _infoTitleText;
+            this.PropertyChanged += FleetTeamViewModel_PropertyChanged;
+        }
 
-        public string infoTitleText
+        void FleetTeamViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "fleetTeamState")
+            {
+                titleColorBrush = FleetTeamModel.getFleetTeamColorBrushFromState(this.fleetTeamState);
+            }
+        }
+
+        public void AddVM(FleetTableViewModel vm)
+        {
+            shipsViewModel.Add(vm);
+        }
+
+        #region fleetName変更通知プロパティ
+        private string _fleetName;
+
+        public string fleetName
         {
             get
-            { return _infoTitleText; }
+            { return _fleetName; }
             set
             { 
-                if (_infoTitleText == value)
+                if (_fleetName == value)
                     return;
-                _infoTitleText = value;
+                _fleetName = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
+        #region level変更通知プロパティ
+        private int _level;
 
-        #region missionCount変更通知プロパティ
-        private int _missionCount;
-
-        public int missionCount
+        public int level
         {
             get
-            { return _missionCount; }
+            { return _level; }
             set
             { 
-                if (_missionCount == value)
+                if (_level == value)
                     return;
-                _missionCount = value;
+                _level = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region seiku変更通知プロパティ
+        private int _seiku;
+
+        public int seiku
+        {
+            get
+            { return _seiku; }
+            set
+            { 
+                if (_seiku == value)
+                    return;
+                _seiku = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region sakuteki変更通知プロパティ
+        private int _sakuteki;
+
+        public int sakuteki
+        {
+            get
+            { return _sakuteki; }
+            set
+            { 
+                if (_sakuteki == value)
+                    return;
+                _sakuteki = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region sakutekiCalced変更通知プロパティ
+        private int _sakutekiCalced;
+
+        public int sakutekiCalced
+        {
+            get
+            { return _sakutekiCalced; }
+            set
+            { 
+                if (_sakutekiCalced == value)
+                    return;
+                _sakutekiCalced = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region fleetTeamState変更通知プロパティ
+        private FleetTeamState _fleetTeamState;
+
+        public FleetTeamState fleetTeamState
+        {
+            get
+            { return _fleetTeamState; }
+            set
+            { 
+                if (_fleetTeamState == value)
+                    return;
+                _fleetTeamState = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        /////
+
+        #region titleColorBrush変更通知プロパティ
+        private SolidColorBrush _titleColorBrush;
+
+        public SolidColorBrush titleColorBrush
+        {
+            get
+            { return _titleColorBrush; }
+            set
+            { 
+                if (_titleColorBrush == value)
+                    return;
+                _titleColorBrush = value;
                 RaisePropertyChanged();
             }
         }

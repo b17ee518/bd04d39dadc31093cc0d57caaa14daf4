@@ -38,7 +38,24 @@
     <SolidColorBrush x:Key="GrayTextBrush" Color="{StaticResource GrayTextColor}"/>
     <Color x:Key="BlueTextColor">#0000ff</Color>
     <SolidColorBrush x:Key="BlueTextBrush" Color="{StaticResource BlueTextColor}"/>
+    <Color x:Key="AquaTextColor">#99ffff</Color>
+    <SolidColorBrush x:Key="AquaTextBrush" Color="{StaticResource AquaTextColor}"/>
 
-
+    <!--Expedition Text Color-->
+    <Color x:Key="Expedition1Color">#e0ffff</Color>
+    <SolidColorBrush x:Key="Expedition1TextBrush" Color="{StaticResource Expedition1Color}"/>
+    <Color x:Key="Expedition2Color">#86ff86</Color>
+    <SolidColorBrush x:Key="Expedition2TextBrush" Color="{StaticResource Expedition2Color}"/>
+    <Color x:Key="Expedition3Color">#97fef3</Color>
+    <SolidColorBrush x:Key="Expedition3TextBrush" Color="{StaticResource Expedition3Color}"/>
+    <Color x:Key="Expedition4Color">#dd97fe</Color>
+    <SolidColorBrush x:Key="Expedition4TextBrush" Color="{StaticResource Expedition4Color}"/>
+    <Color x:Key="Expedition5Color">#3cb371</Color>
+    <SolidColorBrush x:Key="Expedition5TextBrush" Color="{StaticResource Expedition5Color}"/>
     
+    <Color x:Key="ExpeditionExColor">#fc7f6b</Color>
+    <SolidColorBrush x:Key="ExpeditionExTextBrush" Color="{StaticResource ExpeditionExColor}"/>
+
+
+
 </ResourceDictionary>

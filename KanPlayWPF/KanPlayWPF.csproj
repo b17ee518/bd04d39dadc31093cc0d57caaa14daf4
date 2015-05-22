@@ -59,6 +59,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -73,6 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TableDefines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,8 +105,18 @@
     <Compile Include="ControlBase\KListViewBase.cs" />
     <Compile Include="ControlBase\KTitleFrameBase.cs" />
     <Compile Include="ControlBase\KWindowBase.cs" />
+    <Compile Include="Models\BrushModel.cs" />
+    <Compile Include="Models\ChargeModel.cs" />
+    <Compile Include="Models\CondModel.cs" />
+    <Compile Include="Models\FleetTeamModel.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\RepairingModel.cs" />
+    <Compile Include="Models\TimeStringConvertModel.cs" />
+    <Compile Include="Models\WoundModel.cs" />
+    <Compile Include="ViewModels\InfoMainWindow\FleetTableViewModel.cs" />
+    <Compile Include="ViewModels\InfoMainWindow\FleetTeamViewModel.cs" />
     <Compile Include="ViewModels\InfoMainWindow\MissionTableViewModel.cs" />
+    <Compile Include="ViewModels\InfoMainWindow\RepairTableViewModel.cs" />
     <Compile Include="ViewModels\KFoldableListView\KFoldableListViewViewModel.cs" />
     <Compile Include="ViewModels\InfoMainWindowViewModel.cs" />
     <Compile Include="ViewModels\InfoMainWindow\KOverviewTableViewModel.cs" />
