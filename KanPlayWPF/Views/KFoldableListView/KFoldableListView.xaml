@@ -7,7 +7,9 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:KanPlayWPF.Views.KFoldableListView"
         xmlns:vm="clr-namespace:KanPlayWPF.ViewModels.KFoldableListView" 
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" 
     x:Class="KanPlayWPF.Views.KFoldableListView.KFoldableListView"
         d:DesignWidth="320" d:DesignHeight="43" MinWidth="320" MinHeight="25"
                           BorderBrush="{StaticResource HoverBrush}"
@@ -36,7 +38,7 @@
             Style="{StaticResource KToggleButtonStyle}" 
                           Margin="20,0,0,0" VerticalAlignment="Top" Height="25" MinWidth="300" MinHeight="25" MaxHeight="25" Checked="onToggleButtonChecked" Unchecked="onToggleButtonUnchecked"/>
             
-            <ListView x:Name="foldableListView" ItemsSource="{Binding items}" MinHeight="0">
+            <ListView x:Name="foldableListView" MinHeight="0">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource {x:Type ListViewItem}}">
                         <Setter Property="Padding" Value="0,0,0,0"></Setter>

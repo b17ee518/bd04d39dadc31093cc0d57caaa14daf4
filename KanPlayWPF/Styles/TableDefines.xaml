@@ -5,6 +5,7 @@
 
     <System:Double x:Key="listViewOneCharSize">18</System:Double>
 
+    <!--Mission Toggle Button-->
     <Style 
         x:Key="KMissionTableToggleButtonDefine"
         TargetType="{x:Type ToggleButton}"
@@ -14,6 +15,7 @@
         <Setter Property="ContentStringFormat" Value="遂行中任務({0})"/>
     </Style>
 
+    <!--Fleet Toggle Button-->
     <Style 
         x:Key="KFleetTableToggleButtonDefine"
         TargetType="{x:Type ToggleButton}"
@@ -36,6 +38,16 @@
 
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!--Repair Toggle Button-->
+    <Style 
+        x:Key="KRepairTableToggleButtonDefine"
+        TargetType="{x:Type ToggleButton}"
+        BasedOn="{StaticResource KToggleButtonStyle}"
+        x:Shared="False">
+        <Setter Property="Content" Value="{Binding repairCount}"/>
+        <Setter Property="ContentStringFormat" Value="入渠まちーズ({0})"/>
     </Style>
     
     <!--Mission Table-->

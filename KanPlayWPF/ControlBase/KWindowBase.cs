@@ -19,6 +19,8 @@ namespace KanPlayWPF.ControlBase
     /// </summary>
     abstract public class KWindowBase : Window
     {
+        private bool _bActivating = false;
+
         public KWindowBase()
         {
             LoadWindowPos();
@@ -36,7 +38,14 @@ namespace KanPlayWPF.ControlBase
 
         void KWindowBase_Activated(object sender, EventArgs e)
         {
-            activateAllWindows();
+            if (!_bActivating)
+            {
+                _bActivating = true;
+                activateAllWindows();
+                this.Topmost = true;
+                this.Topmost = false;
+                _bActivating = false;
+            }
         }
 
         private void onWindowStateChanged(object sender, EventArgs e)
@@ -81,9 +90,10 @@ namespace KanPlayWPF.ControlBase
             //TODO check subWindowHideState
             foreach (Window window in Application.Current.Windows)
             {
-                if (window.IsVisible)
+                if (window.IsVisible && (window as KWindowBase)._bActivating == false)
                 {
-                    window.Activate();
+                    window.Topmost = true;
+                    window.Topmost = false;
                 }
             }
         }

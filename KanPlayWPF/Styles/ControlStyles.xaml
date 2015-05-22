@@ -142,7 +142,27 @@
     <Style TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="Visibility" Value="Collapsed" />
     </Style>
+
+
+    <!--Progress Bar-->
+    <Style TargetType="{x:Type ProgressBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border BorderBrush="{x:Null}" 
+                                BorderThickness="0" 
+                                Background="{StaticResource BGBrush}" 
+                                CornerRadius="0" Padding="0">
+                        <Grid x:Name="PART_Track">
+                            <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="{StaticResource HoverBrush}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
+
     <!--Data Template-->
     <DataTemplate x:Key="KTextDataTemplate">
         <TextBlock Foreground="{Binding}" />

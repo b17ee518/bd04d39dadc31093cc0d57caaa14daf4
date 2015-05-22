@@ -168,6 +168,9 @@ namespace KanPlayWPF.Views
             repairTable.setExpandableColumn(3);
             repairTable.setItemSource(_repairTableItems);
 
+            repairTable.toggleButton.Style = Application.Current.FindResource("KRepairTableToggleButtonDefine") as Style;
+            repairTable.toggleButton.DataContext = _infoMainWindowVM;
+
             #region SampleData
             _repairTableItems.Add(new RepairTableViewModel()
             {

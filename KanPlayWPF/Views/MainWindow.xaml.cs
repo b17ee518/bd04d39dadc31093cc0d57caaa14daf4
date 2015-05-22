@@ -31,6 +31,7 @@ namespace KanPlayWPF.Views
     public partial class MainWindow : KWindowBase
     {
         InfoMainWindow _infoWindow = null;
+        TimerMainWindow _timerWindow = null;
 
         static private MainWindow _mainWindow = null;
         static public MainWindow getMainWindow()
@@ -46,11 +47,18 @@ namespace KanPlayWPF.Views
 
             _infoWindow = new InfoMainWindow(this);
             _infoWindow.Show();
+
+            _timerWindow = new TimerMainWindow(this);
+            _timerWindow.Show();
         }
 
         public void onInfoMainWindowClosed()
         {
             btnInfo.IsChecked = false;
+        }
+        public void onTimerMainWindowClosed()
+        {
+            btnTimer.IsChecked = false;
         }
 
         private void onWeaponToggleClicked(object sender, RoutedEventArgs e)
@@ -59,20 +67,28 @@ namespace KanPlayWPF.Views
 
         private void onTimerToggleClicked(object sender, RoutedEventArgs e)
         {
-
+            if ((bool)(sender as ToggleButton).IsChecked)
+            {
+                _timerWindow.WindowState = WindowState.Normal;
+                _timerWindow.Show();
+            }
+            else
+            {
+                _timerWindow.Hide();
+            }
         }
 
         private void onInfoToggleClicked(object sender, RoutedEventArgs e)
         {
             if ((bool)(sender as ToggleButton).IsChecked)
             {
+                _infoWindow.WindowState = WindowState.Normal;
                 _infoWindow.Show();
             }
             else
             {
                 _infoWindow.Hide();
             }
-
         }
 
         protected override void LoadWindowPos()

@@ -1,0 +1,169 @@
+﻿<ControlBase:KWindowBase
+    xmlns:ControlBase="clr-namespace:KanPlayWPF.ControlBase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:KanPlayWPF.Views"
+        xmlns:vm="clr-namespace:KanPlayWPF.ViewModels"
+    xmlns:TimerMainWindowControls="clr-namespace:KanPlayWPF.Views.TimerMainWindowControls" 
+    x:Class="KanPlayWPF.Views.TimerMainWindow"
+    Style="{StaticResource KMainWindowStyle}" MinWidth="256" MinHeight="340" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+    ShowInTaskbar="False"
+        Title="TimerMainWindow" MaxWidth="256" MaxHeight="340">
+
+    <ControlBase:KWindowBase.DataContext>
+        <vm:TimerMainWindowViewModel/>
+    </ControlBase:KWindowBase.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+    <Grid>
+
+        <StackPanel>
+            <ControlBase:KTitleFrame Height="20" VerticalAlignment="Top" MinHeight="20" MaxHeight="20" Background="{StaticResource TitleBrush}">
+                <Button Content="X" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Click="onCloseButtonClicked"/>
+            </ControlBase:KTitleFrame>
+
+            <!--Expedition 2-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24" Height="40"
+						Content="②"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="expedition2TimeProgress"/>
+                        <Label Height="20" Content="{Binding expedition2Name}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!--Expedition 3-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24" Height="40"
+						Content="③"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="expedition3TimeProgress"/>
+                        <Label Height="20" Content="{Binding expedition3Name}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!--Expedition 4-->
+            <StackPanel Orientation="Horizontal">
+                <Label Width="24" Height="40"
+						Content="④"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                <StackPanel>
+                    <TimerMainWindowControls:KTimerProgress x:Name="expedition4TimeProgress"/>
+                    <Label Height="20" Content="{Binding expedition4Name}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Border BorderBrush="{StaticResource HoverBrush}" BorderThickness="0 0 0 1" Width="256" Height="1"/>
+
+            <!--Repair 1-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24" Height="40"
+						Content="①"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="repair1TimeProgress"/>
+                        <Label Height="20" Content="{Binding repair1NameAndLevel}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <!--Repair 2-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24" Height="40"
+						Content="②"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="repair2TimeProgress"/>
+                        <Label Height="20" Content="{Binding repair2NameAndLevel}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <!--Repair 3-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24" Height="40"
+						Content="③"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="repair3TimeProgress"/>
+                        <Label Height="20" Content="{Binding repair3NameAndLevel}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <!--Repair 4-->
+            <StackPanel Orientation="Horizontal">
+                <Label Width="24" Height="40"
+						Content="④"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                <StackPanel>
+                    <TimerMainWindowControls:KTimerProgress x:Name="repair4TimeProgress"/>
+                    <Label Height="20" Content="{Binding repair4NameAndLevel}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Border BorderBrush="{StaticResource HoverBrush}" BorderThickness="0 0 0 1" Width="256" Height="1"/>
+
+            <!--Build 1-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="20">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24"
+						Content="①"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0" Margin="0,-4,0,-4"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="build1TimeProgress"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <!--Build 2-->
+            <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="20">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="24"
+						Content="②"
+						VerticalContentAlignment="Center"
+						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0" Margin="0,-4,0,-4"/>
+                    <StackPanel>
+                        <TimerMainWindowControls:KTimerProgress x:Name="build2TimeProgress"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </Grid>
+</ControlBase:KWindowBase>

@@ -15,7 +15,7 @@ using KanPlayWPF.Models;
 
 namespace KanPlayWPF.ViewModels
 {
-    public class InfoMainWindowViewModel : ViewModel
+    public class TimerMainWindowViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -62,60 +62,5 @@ namespace KanPlayWPF.ViewModels
         public void Initialize()
         {
         }
-
-
-        #region infoTitleText変更通知プロパティ
-        private string _infoTitleText;
-
-        public string infoTitleText
-        {
-            get
-            { return _infoTitleText; }
-            set
-            { 
-                if (_infoTitleText == value)
-                    return;
-                _infoTitleText = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-        #region missionCount変更通知プロパティ
-        private int _missionCount;
-
-        public int missionCount
-        {
-            get
-            { return _missionCount; }
-            set
-            { 
-                if (_missionCount == value)
-                    return;
-                _missionCount = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region repairCount変更通知プロパティ
-        private int _repairCount;
-
-        public int repairCount
-        {
-            get
-            { return _repairCount; }
-            set
-            { 
-                if (_repairCount == value)
-                    return;
-                _repairCount = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
     }
 }
