@@ -12,10 +12,11 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using KanPlayWPF.Models;
+using System.Windows.Media;
 
-namespace KanPlayWPF.ViewModels
+namespace KanPlayWPF.ViewModels.TimerMainWindow
 {
-    public class TimerMainWindowViewModel : ViewModel
+    public class KTimerProgressViewModel : ViewModel
     {
         /* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -59,161 +60,79 @@ namespace KanPlayWPF.ViewModels
          * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
          */
 
+        public KTimerProgressViewModel()
+        {
+            Initialize();
+        }
         public void Initialize()
         {
+            progressBarValue = 0;
+            progressBarColor = BrushModel.getProgressBarColorStaticResource(ProgressBarState.Empty);
         }
 
+        #region leftString変更通知プロパティ
+        private string _leftString;
 
-        #region expedition2Name変更通知プロパティ
-        private string _expedition2Name;
-
-        public string expedition2Name
+        public string leftString
         {
             get
-            { return _expedition2Name; }
+            { return _leftString; }
             set
             { 
-                if (_expedition2Name == value)
+                if (_leftString == value)
                     return;
-                _expedition2Name = value;
+                _leftString = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
-        #region expedition3Name変更通知プロパティ
-        private string _expedition3Name;
+        #region rightString変更通知プロパティ
+        private string _rightString;
 
-        public string expedition3Name
+        public string rightString
         {
             get
-            { return _expedition3Name; }
+            { return _rightString; }
             set
             { 
-                if (_expedition3Name == value)
+                if (_rightString == value)
                     return;
-                _expedition3Name = value;
+                _rightString = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
+        
+        #region progressBarValue変更通知プロパティ
+        private int _progressBarValue;
 
-        #region expedition4Name変更通知プロパティ
-        private string _expedition4Name;
-
-        public string expedition4Name
+        public int progressBarValue
         {
             get
-            { return _expedition4Name; }
+            { return _progressBarValue; }
             set
             { 
-                if (_expedition4Name == value)
+                if (_progressBarValue == value)
                     return;
-                _expedition4Name = value;
+                _progressBarValue = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
+        
+        #region progressBarColor変更通知プロパティ
+        private SolidColorBrush _progressBarColor;
 
-
-        #region repair1NameAndLevel変更通知プロパティ
-        private string _repair1NameAndLevel;
-
-        public string repair1NameAndLevel
+        public SolidColorBrush progressBarColor
         {
             get
-            { return _repair1NameAndLevel; }
+            { return _progressBarColor; }
             set
             { 
-                if (_repair1NameAndLevel == value)
+                if (_progressBarColor == value)
                     return;
-                _repair1NameAndLevel = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region repair2NameAndLevel変更通知プロパティ
-        private string _repair2NameAndLevel;
-
-        public string repair2NameAndLevel
-        {
-            get
-            { return _repair2NameAndLevel; }
-            set
-            { 
-                if (_repair2NameAndLevel == value)
-                    return;
-                _repair2NameAndLevel = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region repair3NameAndLevel変更通知プロパティ
-        private string _repair3NameAndLevel;
-
-        public string repair3NameAndLevel
-        {
-            get
-            { return _repair3NameAndLevel; }
-            set
-            { 
-                if (_repair3NameAndLevel == value)
-                    return;
-                _repair3NameAndLevel = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region repair4NameAndLevel変更通知プロパティ
-        private string _repair4NameAndLevel;
-
-        public string repair4NameAndLevel
-        {
-            get
-            { return _repair4NameAndLevel; }
-            set
-            { 
-                if (_repair4NameAndLevel == value)
-                    return;
-                _repair4NameAndLevel = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-
-        #region build1TimeProgress変更通知プロパティ
-        private string _build1TimeProgress;
-
-        public string build1TimeProgress
-        {
-            get
-            { return _build1TimeProgress; }
-            set
-            { 
-                if (_build1TimeProgress == value)
-                    return;
-                _build1TimeProgress = value;
-                RaisePropertyChanged();
-            }
-        }
-        #endregion
-
-        #region build2TimeProgress変更通知プロパティ
-        private string _build2TimeProgress;
-
-        public string build2TimeProgress
-        {
-            get
-            { return _build2TimeProgress; }
-            set
-            { 
-                if (_build2TimeProgress == value)
-                    return;
-                _build2TimeProgress = value;
+                _progressBarColor = value;
                 RaisePropertyChanged();
             }
         }

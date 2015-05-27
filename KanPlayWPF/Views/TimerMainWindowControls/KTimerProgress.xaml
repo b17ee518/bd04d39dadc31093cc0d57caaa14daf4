@@ -33,40 +33,34 @@
     </i:Interaction.Triggers>
     
     <Grid>
-
-        <ListView
-            BorderBrush="{x:Null}"
-            BorderThickness="0">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <ProgressBar Grid.ColumnSpan="2" Grid.ZIndex="0" Value="{Binding progressBarValue}" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ProgressBar Grid.ColumnSpan="2" Grid.ZIndex="0" Value="{Binding progressBarValue}" 
                                      Background="{StaticResource BGBrush}" 
                                      BorderBrush="{x:Null}"
                                      BorderThickness="0">
-                            <ProgressBar.Template>
-                                <ControlTemplate TargetType="{x:Type ProgressBar}">
-                                    <Border BorderBrush="{x:Null}" 
+            <ProgressBar.Template>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Border BorderBrush="{x:Null}" 
                                 BorderThickness="0" 
                                 Background="{StaticResource BGBrush}" 
                                 CornerRadius="0" Padding="0">
-                                        <Grid x:Name="PART_Track">
-                                            <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="{Binding progressBarColor}" />
-                                        </Grid>
-                                    </Border>
-                                </ControlTemplate>
-                            </ProgressBar.Template>
+                        <Grid x:Name="PART_Track">
+                            <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="{Binding progressBarColor}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </ProgressBar.Template>
 
-                        </ProgressBar>
-                        <Label Grid.Column="0" Grid.ZIndex="1" Content="{Binding leftString}"/>
-                        <Label Grid.Column="1" Grid.ZIndex="1" Content="{Binding rightString}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        </ProgressBar>
+        <TextBlock Grid.Column="0" Grid.ZIndex="1" Text="{Binding leftString}"
+                   Padding="{StaticResource leftPadding}"
+                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.ZIndex="1" Text="{Binding rightString}"
+                   Padding="{StaticResource leftPadding}"
+                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
     </Grid>
 </ControlBase:KTimerProgressBase>

@@ -3,6 +3,7 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
     <System:Double x:Key="listViewRowHeight">18</System:Double>
+    <Thickness x:Key="leftPadding">4 0 0 0</Thickness>
     <!--Global-->
     <!--Grid-->
     <Style TargetType="{x:Type Grid}">

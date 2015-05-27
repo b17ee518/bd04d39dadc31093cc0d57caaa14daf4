@@ -36,24 +36,27 @@
 
     <Grid>
 
-        <ControlBase:KTitleFrame Height="20" VerticalAlignment="Top" Width="800" MinHeight="20" MaxHeight="20" Background="{StaticResource TitleBrush}"/>
-        
-        <Button Content="X" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Click="onCloseButtonClicked"/>
-        <Button Content="-" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top" Click="onMinimumButtonClicked"/>
+        <StackPanel>
+            <ControlBase:KTitleFrame Height="20" VerticalAlignment="Top" Width="800" MinHeight="20" MaxHeight="20" Background="{StaticResource TitleBrush}"/>
+            <WebBrowser MinHeight="480" x:Name="webBrowser"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+        <Button Content="X" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="onCloseButtonClicked" Margin="0"/>
+        <Button Content="-" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="onMinimumButtonClicked" Margin="0,0,40,0"/>
 
         <ToggleButton Content="武"
                       x:Name="btnWeapon"
                       IsChecked="False"
-                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,80,0" VerticalAlignment="Top" Click="onWeaponToggleClicked"/>
+                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top" Click="onWeaponToggleClicked"/>
         <ToggleButton Content="時"
                       x:Name="btnTimer"
                       IsChecked="True"
-                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,120,0" VerticalAlignment="Top" Click="onTimerToggleClicked"/>
+                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="onTimerToggleClicked"/>
         <ToggleButton Content="情"
                       x:Name="btnInfo"
                       IsChecked="True"
-                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,140,0" VerticalAlignment="Top" Click="onInfoToggleClicked"/>
-
-
+                      Style="{StaticResource KTitleToggleButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="onInfoToggleClicked"/>
+        </StackPanel>
     </Grid>
 </ControlBase:KWindowBase>

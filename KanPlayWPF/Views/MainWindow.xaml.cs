@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using KanPlayWPF.ControlBase;
 using System.Windows.Controls.Primitives;
+using KanPlayWPF.KanData;
 
 namespace KanPlayWPF.Views
 {
@@ -50,6 +51,27 @@ namespace KanPlayWPF.Views
 
             _timerWindow = new TimerMainWindow(this);
             _timerWindow.Show();
+
+            Fiddler.FiddlerApplication.AfterSessionComplete
+                        += new Fiddler.SessionStateHandler(FiddlerApplication_AfterSessionComplete);
+
+            Fiddler.FiddlerApplication.Startup(0, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway);
+
+            Fiddler.URLMonInterop.SetProxyInProcess(string.Format("127.0.0.1:{0}",
+                        Fiddler.FiddlerApplication.oProxy.ListenPort), "<local>");
+
+            webBrowser.Source = new Uri("http://www.google.com");
+
+            //
+            //test
+            /*
+            string text = System.IO.File.ReadAllText(@"C:\apilog.txt");
+            string[] splited = text.Split(new char[]{'\t', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+            for (int i=0; i<splited.Length/4; i++)
+            {
+                KanDataConnector.Instance.Parse(splited[i * 4 + 1], splited[i * 4 + 2], splited[i * 4 + 3]);
+            }
+             */
         }
 
         public void onInfoMainWindowClosed()
@@ -105,5 +127,25 @@ namespace KanPlayWPF.Views
                 Properties.Settings.Default.Save();
             }
         }
+
+
+        #region Fiddler
+        void FiddlerApplication_AfterSessionComplete(Fiddler.Session oSession)
+        {
+            if (oSession.PathAndQuery.StartsWith("/kcsapi"))
+            {
+                if (oSession.oResponse.MIMEType == "text/plain")
+                {
+                    string requestBody = System.Text.Encoding.UTF8.GetString(oSession.RequestBody);
+                    string responseBody = System.Text.Encoding.UTF8.GetString(oSession.ResponseBody);
+                    KanDataConnector.Instance.Parse(oSession.PathAndQuery, requestBody, responseBody);
+                }
+            }
+            /*
+            System.Diagnostics.Debug.WriteLine(string.Format("Session {0}({3}):HTTP {1} for {2}",
+                    oSession.id, oSession.responseCode, oSession.fullUrl, oSession.oResponse.MIMEType));
+             */
+        }
+        #endregion
     }
 }

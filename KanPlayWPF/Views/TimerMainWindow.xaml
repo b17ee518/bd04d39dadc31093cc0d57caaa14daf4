@@ -11,7 +11,8 @@
     x:Class="KanPlayWPF.Views.TimerMainWindow"
     Style="{StaticResource KMainWindowStyle}" MinWidth="256" MinHeight="340" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
     ShowInTaskbar="False"
-        Title="TimerMainWindow" MaxWidth="256" MaxHeight="340">
+        Title="TimerMainWindow" MaxWidth="256" MaxHeight="340"
+    Loaded="KWindowBase_Loaded">
 
     <ControlBase:KWindowBase.DataContext>
         <vm:TimerMainWindowViewModel/>
@@ -47,13 +48,12 @@
             <!--Expedition 2-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24" Height="40"
-						Content="②"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                        <TextBlock Text="②" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="expedition2TimeProgress"/>
-                        <Label Height="20" Content="{Binding expedition2Name}"/>
+                        <TextBlock Height="20" Text="{Binding expedition2Name}" Padding="{StaticResource leftPadding}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -61,26 +61,24 @@
             <!--Expedition 3-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24" Height="40"
-						Content="③"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                        <TextBlock Text="③" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="expedition3TimeProgress"/>
-                        <Label Height="20" Content="{Binding expedition3Name}"/>
+                        <TextBlock Height="20" Text="{Binding expedition3Name}" Padding="{StaticResource leftPadding}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
             <!--Expedition 4-->
             <StackPanel Orientation="Horizontal">
-                <Label Width="24" Height="40"
-						Content="④"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                    <TextBlock Text="④" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
                 <StackPanel>
                     <TimerMainWindowControls:KTimerProgress x:Name="expedition4TimeProgress"/>
-                    <Label Height="20" Content="{Binding expedition4Name}"/>
+                    <TextBlock Height="20" Text="{Binding expedition4Name}" Padding="{StaticResource leftPadding}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -89,51 +87,47 @@
             <!--Repair 1-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24" Height="40"
-						Content="①"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                        <TextBlock Text="①" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="repair1TimeProgress"/>
-                        <Label Height="20" Content="{Binding repair1NameAndLevel}"/>
+                        <TextBlock Height="20" Text="{Binding repair1NameAndLevel}" Padding="{StaticResource leftPadding}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
             <!--Repair 2-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24" Height="40"
-						Content="②"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                        <TextBlock Text="②" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="repair2TimeProgress"/>
-                        <Label Height="20" Content="{Binding repair2NameAndLevel}"/>
+                        <TextBlock Height="20" Text="{Binding repair2NameAndLevel}" Padding="{StaticResource leftPadding}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
             <!--Repair 3-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="40">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24" Height="40"
-						Content="③"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                        <TextBlock Text="③" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="repair3TimeProgress"/>
-                        <Label Height="20" Content="{Binding repair3NameAndLevel}"/>
+                        <TextBlock Height="20" Text="{Binding repair3NameAndLevel}" Padding="{StaticResource leftPadding}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
             <!--Repair 4-->
             <StackPanel Orientation="Horizontal">
-                <Label Width="24" Height="40"
-						Content="④"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"/>
+                <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="40">
+                    <TextBlock Text="④" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
                 <StackPanel>
                     <TimerMainWindowControls:KTimerProgress x:Name="repair4TimeProgress"/>
-                    <Label Height="20" Content="{Binding repair4NameAndLevel}"/>
+                    <TextBlock Height="20" Text="{Binding repair4NameAndLevel}" Padding="{StaticResource leftPadding}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -142,10 +136,9 @@
             <!--Build 1-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="20">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24"
-						Content="①"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0" Margin="0,-4,0,-4"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="20">
+                        <TextBlock Text="①" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="build1TimeProgress"/>
                     </StackPanel>
@@ -154,10 +147,9 @@
             <!--Build 2-->
             <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 0 1" Width="256" Height="20">
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="24"
-						Content="②"
-						VerticalContentAlignment="Center"
-						BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0" Margin="0,-4,0,-4"/>
+                    <Border BorderBrush="{StaticResource TitleBrush}" BorderThickness="0 0 1 0"  Width="24" Height="20">
+                        <TextBlock Text="②" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <StackPanel>
                         <TimerMainWindowControls:KTimerProgress x:Name="build2TimeProgress"/>
                     </StackPanel>

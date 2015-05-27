@@ -65,5 +65,20 @@ namespace KanPlayWPF.Models
             }
             return res as SolidColorBrush;
         }
+
+        static public SolidColorBrush getProgressBarColorStaticResource(ProgressBarState state)
+        {
+            string resourceName = "BrownProgressBrush";
+            switch (state)
+            {
+                case ProgressBarState.LessThanOneHourLeft:
+                    resourceName = "LimeProgressBrush";
+                    break;
+                case ProgressBarState.Done:
+                    resourceName = "GreenProgressBrush";
+                    break;
+            }
+            return Application.Current.FindResource(resourceName) as SolidColorBrush;
+        }
     }
 }
