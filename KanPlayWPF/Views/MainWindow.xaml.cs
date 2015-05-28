@@ -64,14 +64,14 @@ namespace KanPlayWPF.Views
 
             //
             //test
-            /*
+            
             string text = System.IO.File.ReadAllText(@"C:\apilog.txt");
             string[] splited = text.Split(new char[]{'\t', '\n'}, StringSplitOptions.RemoveEmptyEntries);
             for (int i=0; i<splited.Length/4; i++)
             {
                 KanDataConnector.Instance.Parse(splited[i * 4 + 1], splited[i * 4 + 2], splited[i * 4 + 3]);
             }
-             */
+             
         }
 
         public void onInfoMainWindowClosed()

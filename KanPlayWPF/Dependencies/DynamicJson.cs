@@ -253,7 +253,21 @@ namespace Codeplex.Data
             {
                 value = ((DynamicJson)value).Deserialize(elementType);
             }
-            return Convert.ChangeType(value, elementType);
+
+            object safeValue = value;
+            if (value == null)
+            {
+                if (elementType == typeof(string))
+                {
+                    safeValue = "";
+                }
+                else
+                { 
+                    safeValue = Activator.CreateInstance(elementType);
+                }
+            }
+
+            return Convert.ChangeType(safeValue, elementType);
         }
 
         private object DeserializeObject(Type targetType)
