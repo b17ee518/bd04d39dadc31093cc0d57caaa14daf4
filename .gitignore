@@ -45,3 +45,5 @@ Temporary Items
 # Develop
 KanPlayWPF/bin/
 KanPlayWPF/obj/
+*.suo
+packages
