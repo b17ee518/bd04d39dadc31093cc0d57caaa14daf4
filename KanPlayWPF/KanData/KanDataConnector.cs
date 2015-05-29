@@ -640,7 +640,15 @@ bool AddSlotItem(int id, int slotitemId)
                 DAPILog();
             }
 
-            var jobj = json.api_data;
+            dynamic jobj;
+            try
+            {
+                jobj = json.api_data;
+            }
+            catch
+            {
+                jobj = null;
+            }
 
             _req.ReadFromString(_pathAndQuery, _requestBody);
 
@@ -784,10 +792,9 @@ bool get_member_ship_deck_parse(dynamic jobj)
 	{
         for (int i = 0; i < pksd.portdata.api_ship.Count; i++ )
         {
-            kcsapi_ship2 it = pksd.portdata.api_ship[i];
-            if (v.api_id == it.api_id)
+            if (v.api_id == pksd.portdata.api_ship[i].api_id)
             {
-                it = v;
+                pksd.portdata.api_ship[i] = v;
             }
 
         }
@@ -1545,8 +1552,11 @@ bool get_member_questlist_parse(dynamic jobj)
 
 	if (questcount == 0)
 	{
-        pksd.questdata.RemoveAt(pksd.questdata.Count - 1);
-		// when last page nothing??
+        if (pksd.questdata.Count > 0)
+        { 
+            pksd.questdata.RemoveAt(pksd.questdata.Count - 1);
+		    // when last page nothing??
+        }
 	}
 	else
 	{

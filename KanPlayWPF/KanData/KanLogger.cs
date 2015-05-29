@@ -34,15 +34,20 @@ namespace KanPlayWPF.KanData
         #region Logger
         private void AddLog(string filename, string log)
         {
-            if (!File.Exists(filename))
+            try
             {
-                File.CreateText(filename);
+                using (var sw = new StreamWriter(
+                    new FileStream(filename, FileMode.Append, FileAccess.Write), Encoding.GetEncoding("UTF-16")))
+                {
+                    string str = DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss]\t");
+                    str += log;
+                    sw.WriteLine(str);
+                }
             }
-            StreamWriter sw = File.AppendText(filename);
+            catch
+            {
 
-            string str = DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss]\t");
-            str += log;
-            sw.WriteLine(str);
+            }
         }
 
         public void LogError(string log)
@@ -57,7 +62,12 @@ namespace KanPlayWPF.KanData
 
         public void RecordLog(string filename, string log)
         { 
-            string fullpath = AppDomain.CurrentDomain.BaseDirectory + "/log/" + filename + ".table";
+            string path = AppDomain.CurrentDomain.BaseDirectory + "/log/";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string fullpath = path + filename + ".table";
             AddLog(fullpath, log);
         }
         #endregion
@@ -371,8 +381,8 @@ public void logBattleDetail(bool bCombined)
 		afterhpline += pship.api_nowhp.ToString() + "\t";
 		if (pmstship != null)
 		{
-			nenryoline += string.Format("{0:P}", pship.api_fuel * 100 / pmstship.api_fuel_max) + "\t";
-			danyakuline += string.Format("{0:P}", pship.api_bull * 100 / pmstship.api_bull_max) + "\t";
+			nenryoline += string.Format("{0:P0}", (Double)pship.api_fuel / (Double)pmstship.api_fuel_max) + "\t";
+			danyakuline += string.Format("{0:P0}", (Double)pship.api_bull / (Double)pmstship.api_bull_max) + "\t";
 		}
 		condline += pship.api_cond.ToString() + "\t";
 	}

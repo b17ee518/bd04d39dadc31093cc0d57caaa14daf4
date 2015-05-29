@@ -42,6 +42,11 @@ namespace KanPlayWPF.Views
 
         private InfoMainWindowViewModel _infoMainWindowVM = new InfoMainWindowViewModel();
         
+        public KOverviewTableViewModel getOverViewTableVM()
+        {
+            return overviewTable.overviewTableVM;
+        }
+
         public InfoMainWindow(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;

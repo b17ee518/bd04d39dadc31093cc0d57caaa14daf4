@@ -31,8 +31,8 @@ namespace KanPlayWPF.Views
     /// </summary>
     public partial class MainWindow : KWindowBase
     {
-        InfoMainWindow _infoWindow = null;
-        TimerMainWindow _timerWindow = null;
+        public InfoMainWindow infoWindow { get; private set; }
+        public TimerMainWindow timerWindow { get; private set; }
 
         static private MainWindow _mainWindow = null;
         static public MainWindow getMainWindow()
@@ -46,11 +46,11 @@ namespace KanPlayWPF.Views
 
             InitializeComponent();
 
-            _infoWindow = new InfoMainWindow(this);
-            _infoWindow.Show();
+            infoWindow = new InfoMainWindow(this);
+            infoWindow.Show();
 
-            _timerWindow = new TimerMainWindow(this);
-            _timerWindow.Show();
+            timerWindow = new TimerMainWindow(this);
+            timerWindow.Show();
 
             Fiddler.FiddlerApplication.AfterSessionComplete
                         += new Fiddler.SessionStateHandler(FiddlerApplication_AfterSessionComplete);
@@ -91,12 +91,12 @@ namespace KanPlayWPF.Views
         {
             if ((bool)(sender as ToggleButton).IsChecked)
             {
-                _timerWindow.WindowState = WindowState.Normal;
-                _timerWindow.Show();
+                timerWindow.WindowState = WindowState.Normal;
+                timerWindow.Show();
             }
             else
             {
-                _timerWindow.Hide();
+                timerWindow.Hide();
             }
         }
 
@@ -104,12 +104,12 @@ namespace KanPlayWPF.Views
         {
             if ((bool)(sender as ToggleButton).IsChecked)
             {
-                _infoWindow.WindowState = WindowState.Normal;
-                _infoWindow.Show();
+                infoWindow.WindowState = WindowState.Normal;
+                infoWindow.Show();
             }
             else
             {
-                _infoWindow.Hide();
+                infoWindow.Hide();
             }
         }
 

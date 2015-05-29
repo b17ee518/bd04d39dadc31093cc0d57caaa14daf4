@@ -55,18 +55,18 @@ namespace KanPlayWPF.KanData
         }
         #endregion
 
-        public kcsapi_port portdata { get; set; }
-        public kcsapi_start2 start2data { get; set; }
-        public List<kcsapi_slotitem> slotitemdata { get; set; }
-        public List<kcsapi_kdock> kdockdata { get; set; }
-        public List<kcsapi_quest> questdata { get; set; }
-        public kcsapi_next nextdata { get; set; }
-        public kcsapi_battle battledata { get; set; }
-        public kcsapi_battleresult battleresultdata { get; set; }
+        public kcsapi_port portdata = new kcsapi_port();
+        public kcsapi_start2 start2data = new kcsapi_start2();
+        public List<kcsapi_slotitem> slotitemdata = new List<kcsapi_slotitem>();
+        public List<kcsapi_kdock> kdockdata = new List<kcsapi_kdock>();
+        public List<kcsapi_quest> questdata = new List<kcsapi_quest>();
+        public kcsapi_next nextdata = new kcsapi_next();
+        public kcsapi_battle battledata = new kcsapi_battle();
+        public kcsapi_battleresult battleresultdata = new kcsapi_battleresult();
 
-        public CreateShipSaveData createshipdata { get; set; }
+        public CreateShipSaveData createshipdata = new CreateShipSaveData();
 
-        public List<int> enemyhpdata { get; set; }
+        public List<int> enemyhpdata = new List<int>();
 
         public int shipcountoffset { get; set; }
         public int slotitemcountoffset { get; set; }

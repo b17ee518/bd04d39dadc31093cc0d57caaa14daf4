@@ -267,7 +267,14 @@ namespace Codeplex.Data
                 }
             }
 
-            return Convert.ChangeType(safeValue, elementType);
+            try
+            { 
+                return Convert.ChangeType(safeValue, elementType);
+            }
+            catch
+            {
+                return Activator.CreateInstance(elementType);
+            }
         }
 
         private object DeserializeObject(Type targetType)

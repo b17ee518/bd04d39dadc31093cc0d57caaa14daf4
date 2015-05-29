@@ -13,13 +13,13 @@ namespace KanPlayWPF.KanData
     
     public class kcsapi_basic : KAPIBaseData
     {
-    	public kcsapi_basic(){}
+    	public kcsapi_basic() { }
         
         public string api_member_id {get; set;}
         public string api_nickname {get; set;}
         public string api_nickname_id {get; set;}
         public int api_active_flag {get; set;}
-        public Int64 api_starttime {get; set;}
+        private Int64 _api_starttime = new Int64(); public Int64 api_starttime { get { return _api_starttime; } set { _api_starttime = value; } }
         public int api_level {get; set;}
         public int api_rank {get; set;}
         public int api_experience {get; set;}
@@ -30,8 +30,8 @@ namespace KanPlayWPF.KanData
     	public int api_max_slotitem {get; set;}
     	public int api_max_kagu {get; set;}
     	public int api_playtime {get; set;}
-    	public int api_tutorial {get; set;}
-    	public List<int> api_furniture {get; set;}
+        public int api_tutorial { get; set; }
+        private List<int> _api_furniture = new List<int>(); public List<int> api_furniture { get { return _api_furniture; } set { _api_furniture = value; } }
     	public int api_count_deck {get; set;}
     	public int api_count_kdock {get; set;}
     	public int api_count_ndock {get; set;}
@@ -46,7 +46,7 @@ namespace KanPlayWPF.KanData
     	public int api_pt_challenged_win {get; set;}
     	public int api_firstflag {get; set;}
 	    public int api_tutorial_progress {get; set;}
-    	public List<int> api_pvp {get; set;}
+        private List<int> _api_pvp = new List<int>(); public List<int> api_pvp { get { return _api_pvp; } set { _api_pvp = value; } }
 	    // "api_large_dock":1
     }
     
@@ -59,7 +59,7 @@ namespace KanPlayWPF.KanData
 	    public int api_e_count {get; set;}
 	    public int api_e_lostcount {get; set;}
 	    public int api_disp_seiku {get; set;}
-	    public List<int> api_touch_plane {get; set;}
+        private List<int> _api_touch_plane = new List<int>(); public List<int> api_touch_plane { get { return _api_touch_plane; } set { _api_touch_plane = value; } }
     }
 
     public class kcsapi_battle_kouku_stage2 : KAPIBaseData
@@ -75,30 +75,30 @@ namespace KanPlayWPF.KanData
 
     public class kcsapi_battle_kouku_stage3 : KAPIBaseData
     {
-        kcsapi_battle_kouku_stage3(){}
+        public kcsapi_battle_kouku_stage3(){}
 
 	    // from #1
-	    public List<int> api_frai_flag {get; set;}
-	    public List<int> api_erai_flag {get; set;}
-	    public List<int> api_fbak_flag {get; set;}
-	    public List<int> api_ebak_flag {get; set;}
-	    public List<int> api_fcl_flag {get; set;}
-	    public List<int> api_ecl_flag {get; set;}
-	    public List<Double> api_fdam {get; set;}
-	    public List<Double> api_edam {get; set;}
+        public List<int> api_frai_flag = new List<int>();
+        public List<int> api_erai_flag = new List<int>();
+        public List<int> api_fbak_flag = new List<int>();
+        public List<int> api_ebak_flag = new List<int>();
+        public List<int> api_fcl_flag = new List<int>();
+        public List<int> api_ecl_flag = new List<int>();
+        public List<Double> api_fdam = new List<Double>();
+        public List<Double> api_edam = new List<Double>();
     }
 
     public class kcsapi_battle_kouku : KAPIBaseData
     {
 
 	    public kcsapi_battle_kouku(){}
-	    
-	    public List<List<int>> api_plane_from {get; set;} //? f, e list
-	    public kcsapi_battle_kouku_stage1 api_stage1 {get; set;}
-	    public kcsapi_battle_kouku_stage2 api_stage2 {get; set;}
-	    public kcsapi_battle_kouku_stage3 api_stage3 {get; set;}
+
+        public List<List<int>> api_plane_from = new List<List<int>>(); //? f, e list
+        public kcsapi_battle_kouku_stage1 api_stage1 = new kcsapi_battle_kouku_stage1();
+        public kcsapi_battle_kouku_stage2 api_stage2 = new kcsapi_battle_kouku_stage2();
+        public kcsapi_battle_kouku_stage3 api_stage3 = new kcsapi_battle_kouku_stage3();
 	    // combined
-	    public kcsapi_battle_kouku_stage3 api_stage3_combined {get; set;}
+	    public kcsapi_battle_kouku_stage3 api_stage3_combined = new kcsapi_battle_kouku_stage3();
     }
 
     public class kcsapi_battle_support_airatack_stage1 : KAPIBaseData
@@ -123,11 +123,11 @@ namespace KanPlayWPF.KanData
     {
 
 	    public kcsapi_battle_support_airatack_stage3(){}
-	    
-	    public List<int> api_erai_flag {get; set;}
-	    public List<int> api_ebak_flag {get; set;}
-	    public List<int> api_ecl_flag {get; set;}
-	    public List<Double> api_edam {get; set;}
+
+        public List<int> api_erai_flag = new List<int>();
+        public List<int> api_ebak_flag = new List<int>();
+        public List<int> api_ecl_flag = new List<int>();
+        public List<Double> api_edam = new List<Double>();
     }
 
     public class kcsapi_battle_support_airatack : KAPIBaseData
@@ -136,13 +136,13 @@ namespace KanPlayWPF.KanData
 	    public kcsapi_battle_support_airatack(){}
 	    
 	    public int api_deck_id {get; set;}
-	    public List<int> api_ship_id {get; set;}
-	    public List<int> api_undressing_flag {get; set;} //??
-	    public List<int> api_stage_flag {get; set;}
-	    public List<List<int>> api_plane_from {get; set;}
-	    public kcsapi_battle_support_airatack_stage1 api_stage1 {get; set;}
-	    public kcsapi_battle_support_airatack_stage2 api_stage2 {get; set;}
-	    public kcsapi_battle_support_airatack_stage3 api_stage3 {get; set;}
+        public List<int> api_ship_id = new List<int>();
+        public List<int> api_undressing_flag = new List<int>(); //??
+        public List<int> api_stage_flag = new List<int>();
+        public List<List<int>> api_plane_from = new List<List<int>>();
+        public kcsapi_battle_support_airatack_stage1 api_stage1 = new kcsapi_battle_support_airatack_stage1();
+        public kcsapi_battle_support_airatack_stage2 api_stage2 = new kcsapi_battle_support_airatack_stage2();
+        public kcsapi_battle_support_airatack_stage3 api_stage3 = new kcsapi_battle_support_airatack_stage3();
     }
 
     public class kcsapi_battle_support_hourai : KAPIBaseData
@@ -151,10 +151,10 @@ namespace KanPlayWPF.KanData
 	    public kcsapi_battle_support_hourai(){}
 	    
 	    public int api_deck_id {get; set;}
-	    public List<int> api_ship_id {get; set;}
-	    public List<int> api_undressing_flag {get; set;}
-	    public List<int> api_cl_list {get; set;}
-	    public List<Double> api_damage {get; set;}
+        public List<int> api_ship_id = new List<int>();
+        public List<int> api_undressing_flag = new List<int>();
+        public List<int> api_cl_list = new List<int>();
+        public List<Double> api_damage = new List<Double>();
     }
 
     public class kcsapi_battle_support_info : KAPIBaseData
@@ -163,8 +163,8 @@ namespace KanPlayWPF.KanData
 	    public kcsapi_battle_support_info(){}
 	    
 	    //TODO: support info
-	    public kcsapi_battle_support_airatack api_support_airatack {get; set;}
-	    public kcsapi_battle_support_hourai api_support_hourai {get; set;}
+        public kcsapi_battle_support_airatack api_support_airatack = new kcsapi_battle_support_airatack();
+        public kcsapi_battle_support_hourai api_support_hourai = new kcsapi_battle_support_hourai();
     }
 
     public class kcsapi_battle_opening_atack : KAPIBaseData
@@ -173,22 +173,22 @@ namespace KanPlayWPF.KanData
 	    public kcsapi_battle_opening_atack(){}
 	    
 	    // from #1
-	    public List<int> api_frai {get; set;}
-	    public List<int> api_erai {get; set;}
-	    public List<Double> api_fdam {get; set;}
-	    public List<Double> api_edam {get; set;}
-	    public List<Double> api_fydam {get; set;}
-	    public List<Double> api_eydam {get; set;}
-	    public List<int> api_fcl {get; set;}
-	    public List<int> api_ecl {get; set;}
+        public List<int> api_frai = new List<int>();
+        public List<int> api_erai = new List<int>();
+        public List<Double> api_fdam = new List<Double>();
+        public List<Double> api_edam = new List<Double>();
+        public List<Double> api_fydam = new List<Double>();
+        public List<Double> api_eydam = new List<Double>();
+        public List<int> api_fcl = new List<int>();
+        public List<int> api_ecl = new List<int>();
     }
 
     public class kcsapi_battle_hougeki : KAPIBaseData
     {
 	    public kcsapi_battle_hougeki(){}
-	    
-	    public List<int> api_at_list {get; set;}
-	    public List<int> api_at_type {get; set;}
+
+        public List<int> api_at_list = new List<int>();
+        public List<int> api_at_type = new List<int>();
 	    /*
 	    public 0 砲撃
 	    public 1 レーザー
@@ -201,12 +201,12 @@ namespace KanPlayWPF.KanData
 	    public 8　爆雷
 	    public */
 	    // must skip #0
-	    public List<List<int>> api_df_list {get; set;}
-	    public List<List<int>> api_si_list {get; set;}
-	    public List<List<int>> api_cl_list {get; set;}
+        public List<List<int>> api_df_list = new List<List<int>>();
+        public List<List<int>> api_si_list = new List<List<int>>();
+        public List<List<int>> api_cl_list = new List<List<int>>();
 
 	    // midnight
-	    public List<int> api_sp_list {get; set;}
+        public List<int> api_sp_list = new List<int>();
 	    /*
 	    public 0　通常
 	    public 1　連続
@@ -216,7 +216,7 @@ namespace KanPlayWPF.KanData
 	    public 5　主砲主砲主砲
 	    public */
 
-	    public List<List<Double>> api_damage {get; set;}
+        public List<List<Double>> api_damage = new List<List<double>>();
     }
 
     public class kcsapi_battle_raigeki : KAPIBaseData
@@ -225,14 +225,14 @@ namespace KanPlayWPF.KanData
 	    public kcsapi_battle_raigeki(){}
 	    
 	    // from #1
-	    public List<int> api_frai {get; set;}
-	    public List<int> api_erai {get; set;}
-	    public List<Double> api_fdam {get; set;}
-	    public List<Double> api_edam {get; set;}
-	    public List<Double> api_fydam {get; set;}
-	    public List<Double> api_eydam {get; set;}
-	    public List<int> api_fcl {get; set;}
-	    public List<int> api_ecl {get; set;}
+        public List<int> api_frai = new List<int>();
+        public List<int> api_erai = new List<int>();
+	    public List<Double> api_fdam = new List<double>();
+	    public List<Double> api_edam = new List<double>();
+	    public List<Double> api_fydam = new List<double>();
+        public List<Double> api_eydam = new List<double>();
+        public List<int> api_fcl = new List<int>();
+        public List<int> api_ecl = new List<int>();
     }
     /************************************************************************/
     /* battle and midnight_battle                                           */
@@ -248,46 +248,46 @@ namespace KanPlayWPF.KanData
 	    public int api_deck_id {get; set;}
 	    public string api_deck_id_s {get; set;}
 
-	    public List<int> api_ship_ke {get; set;} //enemy ship list from #1
-	    public List<int> api_ship_lv {get; set;} //enemy ship lv from #1
-	    public List<int> api_nowhps {get; set;} // both hps from #1 (13)
-	    public List<int> api_maxhps {get; set;}
+        public List<int> api_ship_ke = new List<int>(); //enemy ship list from #1
+        public List<int> api_ship_lv = new List<int>(); //enemy ship lv from #1
+        public List<int> api_nowhps = new List<int>(); // both hps from #1 (13)
+        public List<int> api_maxhps = new List<int>();
 
 	    // combined
-	    public List<int> api_nowhps_combined {get; set;}
-	    public List<int> api_maxhps_combined {get; set;}
+        public List<int> api_nowhps_combined = new List<int>();
+        public List<int> api_maxhps_combined = new List<int>();
 	    
 	    public int api_midnight_flag {get; set;}
-	    public List<List<int>> api_eSlot {get; set;} // from #0
-	    public List<List<int>> api_eKyouka {get; set;} // from #0
-	    public List<List<int>> api_fParam {get; set;} // from #0
+        public List<List<int>> api_eSlot = new List<List<int>>(); // from #0
+        public List<List<int>> api_eKyouka = new List<List<int>>(); // from #0
+        public List<List<int>> api_fParam = new List<List<int>>(); // from #0
 	    // combined
-	    public List<List<int>> api_fParam_combined {get; set;} // from #0
-	    public List<List<int>> api_eParam {get; set;} // from #0
-	    public List<int> api_search {get; set;} //?
-	    public List<int> api_formation {get; set;} // f, e, i { null, "単縦陣", "複縦陣", "輪形陣", "梯形陣", "単横陣" } { null, "同航戦", "反航戦", "Ｔ字戦(有利)", "Ｔ字戦(不利)" }
-	    public List<int> api_stage_flag {get; set;} // kouku stage1~3
+        public List<List<int>> api_fParam_combined = new List<List<int>>(); // from #0
+        public List<List<int>> api_eParam = new List<List<int>>(); // from #0
+        public List<int> api_search = new List<int>(); //?
+        public List<int> api_formation = new List<int>(); // f, e, i { null, "単縦陣", "複縦陣", "輪形陣", "梯形陣", "単横陣" } { null, "同航戦", "反航戦", "Ｔ字戦(有利)", "Ｔ字戦(不利)" }
+        public List<int> api_stage_flag = new List<int>(); // kouku stage1~3
 
 	    // midnight
-	    public List<int> api_touch_plane {get; set;}
-	    public List<int> api_flare_pos {get; set;}
+        public List<int> api_touch_plane = new List<int>();
+        public List<int> api_flare_pos = new List<int>();
 
-	    public kcsapi_battle_kouku api_kouku {get; set;}
+	    public kcsapi_battle_kouku api_kouku = new kcsapi_battle_kouku();
 	    // combine
-	    public kcsapi_battle_kouku api_kouku2 {get; set;}
+        public kcsapi_battle_kouku api_kouku2 = new kcsapi_battle_kouku();
 
 	    public int api_support_flag {get; set;} //空爆1　砲撃2　雷撃3
-	    public kcsapi_battle_support_info api_support_info {get; set;}
+	    public kcsapi_battle_support_info api_support_info = new kcsapi_battle_support_info();
 	    public int api_opening_flag {get; set;}
-	    public kcsapi_battle_opening_atack api_opening_atack {get; set;}
-	    public List<int> api_hourai_flag {get; set;} // hougeki1, hougeki2, hougeki3, raigeki
-	    public kcsapi_battle_hougeki api_hougeki1 {get; set;}
-	    public kcsapi_battle_hougeki api_hougeki2 {get; set;}
-	    public kcsapi_battle_hougeki api_hougeki3 {get; set;}
-	    public kcsapi_battle_raigeki api_raigeki {get; set;}
+	    public kcsapi_battle_opening_atack api_opening_atack = new kcsapi_battle_opening_atack();
+        public List<int> api_hourai_flag = new List<int>(); // hougeki1, hougeki2, hougeki3, raigeki
+	    public kcsapi_battle_hougeki api_hougeki1 = new kcsapi_battle_hougeki();
+	    public kcsapi_battle_hougeki api_hougeki2 = new kcsapi_battle_hougeki();
+	    public kcsapi_battle_hougeki api_hougeki3 = new kcsapi_battle_hougeki();
+	    public kcsapi_battle_raigeki api_raigeki = new kcsapi_battle_raigeki();
 
 	    // midnight
-	    public kcsapi_battle_hougeki api_hougeki {get; set;} //midnight
+        public kcsapi_battle_hougeki api_hougeki = new kcsapi_battle_hougeki(); //midnight
     }
 
 
@@ -317,7 +317,7 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_battleresult(){}
 
-	    public List<int> api_ship_id {get; set;}
+        public List<int> api_ship_id = new List<int>();
 	    public string api_win_rank {get; set;}
 	    public int api_get_exp {get; set;}
 	    public int api_mvp {get; set;}
@@ -327,21 +327,21 @@ namespace KanPlayWPF.KanData
 	    public int api_member_lv {get; set;}
 	    public int api_member_exp {get; set;}
 	    public int api_get_base_exp {get; set;}
-	    public List<int> api_get_ship_exp {get; set;}
-	    public List<List<int>> api_get_exp_lvup {get; set;}
+        public List<int> api_get_ship_exp = new List<int>();
+        public List<List<int>> api_get_exp_lvup = new List<List<int>>();
 	    // combined
-	    public List<int> api_get_ship_exp_combined {get; set;}
-	    public List<List<int>> api_get_exp_lvup_combined {get; set;}
+        public List<int> api_get_ship_exp_combined = new List<int>();
+        public List<List<int>> api_get_exp_lvup_combined = new List<List<int>>();
 
 	    public int api_dests {get; set;}
 	    public int api_destsf {get; set;}
-	    public List<int> api_lost_flag {get; set;}
+        public List<int> api_lost_flag = new List<int>();
 	    public string api_quest_name {get; set;}
 	    public int api_quest_level {get; set;}
-	    public kcsapi_battleresult_enemyinfo api_enemy_info {get; set;}
+        public kcsapi_battleresult_enemyinfo api_enemy_info = new kcsapi_battleresult_enemyinfo();
 	    public int api_first_clear {get; set;}
-	    public List<int> api_get_flag {get; set;}
-	    public kcsapi_battleresult_getship api_get_ship {get; set;}
+        public List<int> api_get_flag = new List<int>();
+        public kcsapi_battleresult_getship api_get_ship = new kcsapi_battleresult_getship();
 	    public int api_get_eventflag {get; set;}
 	    public int api_get_exmap_rate {get; set;}
 	    public int api_get_exmap_useitem_id {get; set;}
@@ -361,7 +361,7 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_practice_enemyinfo_deck(){}
 	     
-	    public List<kcsapi_practice_enemyinfo_deck_ships> api_ships {get; set;}
+	    public List<kcsapi_practice_enemyinfo_deck_ships> api_ships = new List<kcsapi_practice_enemyinfo_deck_ships>();
     }
 
     /************************************************************************/
@@ -378,14 +378,14 @@ namespace KanPlayWPF.KanData
 	    public string api_cmt_id {get; set;}
 	    public int api_level {get; set;}
 	    public int api_rank {get; set;}
-	    public List<int> api_experience {get; set;}
+        public List<int> api_experience = new List<int>();
 	    public int api_friend {get; set;}
-	    public List<int> api_ship {get; set;}
-	    public List<int> api_slotitem {get; set;}
+        public List<int> api_ship = new List<int>();
+        public List<int> api_slotitem = new List<int>();
 	    public int api_furniture {get; set;}
 	    public string api_deckname {get; set;}
 	    public string api_deckname_id {get; set;}
-	    public kcsapi_practice_enemyinfo_deck api_deck {get; set;}
+        public kcsapi_practice_enemyinfo_deck api_deck = new kcsapi_practice_enemyinfo_deck();
     }
 
 
@@ -422,7 +422,7 @@ namespace KanPlayWPF.KanData
 	    public int api_id {get; set;}
 	    public int api_fuel {get; set;}
 	    public int api_bull {get; set;}
-	    public List<int> api_onslot {get; set;}
+        public List<int> api_onslot = new List<int>();
     }
 
     /**
@@ -432,8 +432,8 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_charge(){}
 
-	    public List<kcsapi_charge_ship> api_ship {get; set;}
-	    public List<int> api_material {get; set;}
+        public List<kcsapi_charge_ship> api_ship = new List<kcsapi_charge_ship>();
+        public List<int> api_material = new List<int>();
 	    public int api_use_bou {get; set;}
     }
 
@@ -448,10 +448,10 @@ namespace KanPlayWPF.KanData
 	    public int api_slotitem_id {get; set;}
 	    public int api_create_flag {get; set;}
 	    public int api_shizai_flag {get; set;}
-	    public kcsapi_slotitem api_slot_item {get; set;}
-	    public List<int> api_material {get; set;}
+        public kcsapi_slotitem api_slot_item = new kcsapi_slotitem();
+        public List<int> api_material = new List<int>();
 	    public int api_type3 {get; set;}
-	    public List<int> api_unsetslot {get; set;}
+        public List<int> api_unsetslot = new List<int>();
     }
 
 
@@ -466,9 +466,9 @@ namespace KanPlayWPF.KanData
 	    public int api_id {get; set;}
 	    public string api_name {get; set;}
 	    public string api_name_id {get; set;}
-	    public List<Int64> api_mission {get; set;}
+        public List<Int64> api_mission = new List<Int64>();
 	    public string api_flagship {get; set;}
-	    public List<int> api_ship {get; set;}
+        public List<int> api_ship = new List<int>();
     }
 
     /**
@@ -478,7 +478,7 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_destroyitem2(){}
 
-	    public List<int> api_get_material {get; set;}
+        public List<int> api_get_material = new List<int>();
     }
 
     /**
@@ -488,7 +488,7 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_destroyship(){}
 
-	    public List<int> api_material {get; set;}
+        public List<int> api_material = new List<int>();
     }
 
     /**
@@ -502,7 +502,7 @@ namespace KanPlayWPF.KanData
 	    public int api_id {get; set;}
 	    public int api_state {get; set;}
 	    public int api_created_ship_id {get; set;}
-	    public Int64 api_complete_time {get; set;}
+	    public Int64 api_complete_time = new Int64();
 	    public string api_complete_time_str {get; set;}
 	    public int api_item1 {get; set;}
 	    public int api_item2 {get; set;}
@@ -531,23 +531,23 @@ namespace KanPlayWPF.KanData
 	    public int api_aftershipid {get; set;}
 	    public int api_nowhp {get; set;}
 	    public int api_maxhp {get; set;}
-	    public List<int> api_taik {get; set;}
-	    public List<int> api_souk {get; set;}
-	    public List<int> api_houg {get; set;}
-	    public List<int> api_raig {get; set;}
-	    public List<int> api_baku {get; set;}
-	    public List<int> api_tyku {get; set;}
-	    public List<int> api_houm {get; set;}
-	    public List<int> api_raim {get; set;}
-	    public List<int> api_saku {get; set;}
-	    public List<int> api_luck {get; set;}
+        public List<int> api_taik = new List<int>();
+        public List<int> api_souk = new List<int>();
+        public List<int> api_houg = new List<int>();
+        public List<int> api_raig = new List<int>();
+        public List<int> api_baku = new List<int>();
+        public List<int> api_tyku = new List<int>();
+        public List<int> api_houm = new List<int>();
+        public List<int> api_raim = new List<int>();
+        public List<int> api_saku = new List<int>();
+        public List<int> api_luck = new List<int>();
 	    public int api_soku {get; set;}
 	    public int api_leng {get; set;}
-	    public List<int> api_slot {get; set;}
-	    public List<int> api_onslot {get; set;}
-	    public List<int> api_broken {get; set;}
-	    public List<int> api_powup {get; set;}
-	    public List<int> api_kyouka {get; set;}
+        public List<int> api_slot = new List<int>();
+        public List<int> api_onslot = new List<int>();
+        public List<int> api_broken = new List<int>();
+        public List<int> api_powup = new List<int>();
+        public List<int> api_kyouka = new List<int>();
 	    public int api_backs {get; set;}
 	    public int api_fuel {get; set;}
 	    public int api_fuel_max {get; set;}
@@ -558,18 +558,18 @@ namespace KanPlayWPF.KanData
 	    public int api_slotnum {get; set;}
 	    public int api_ndock_time {get; set;}
 	    public string api_ndock_time_str {get; set;}
-	    public List<int> api_ndock_item {get; set;}
+        public List<int> api_ndock_item = new List<int>();
 	    public int api_star {get; set;}
 	    public int api_srate {get; set;}
 	    public int api_cond {get; set;}
-	    public List<int> api_karyoku {get; set;}
-	    public List<int> api_raisou {get; set;}
-	    public List<int> api_taiku {get; set;}
-	    public List<int> api_soukou {get; set;}
-	    public List<int> api_kaihi {get; set;}
-	    public List<int> api_taisen {get; set;}
-	    public List<int> api_sakuteki {get; set;}
-	    public List<int> api_lucky {get; set;}
+        public List<int> api_karyoku = new List<int>();
+        public List<int> api_raisou = new List<int>();
+        public List<int> api_taiku = new List<int>();
+        public List<int> api_soukou = new List<int>();
+        public List<int> api_kaihi = new List<int>();
+        public List<int> api_taisen = new List<int>();
+        public List<int> api_sakuteki = new List<int>();
+        public List<int> api_lucky = new List<int>();
 	    public int api_use_fuel {get; set;}
 	    public int api_use_bull {get; set;}
 	    public int api_voicef {get; set;}
@@ -581,6 +581,7 @@ namespace KanPlayWPF.KanData
     public class kcsapi_mst_ship : KAPIBaseData
     {
 	    public kcsapi_mst_ship(){}
+
 	    public int api_id {get; set;}
 	    public int api_sortno {get; set;}
 	    public string api_name {get; set;}
@@ -591,35 +592,35 @@ namespace KanPlayWPF.KanData
 	    public string api_enqflg {get; set;}
 	    public int api_afterlv {get; set;}
 	    public string api_aftershipid {get; set;}
-	    public List<int> api_taik {get; set;}
-	    public List<int> api_souk {get; set;}
-	    public List<int> api_tous {get; set;}
-	    public List<int> api_houg {get; set;}
-	    public List<int> api_raig {get; set;}
-	    public List<int> api_baku {get; set;}
-	    public List<int> api_tyku {get; set;}
-	    public List<int> api_atap {get; set;}
-	    public List<int> api_tais {get; set;}
-	    public List<int> api_houm {get; set;}
-	    public List<int> api_raim {get; set;}
-	    public List<int> api_kaih {get; set;}
-	    public List<int> api_houk {get; set;}
-	    public List<int> api_raik {get; set;}
-	    public List<int> api_bakk {get; set;}
-	    public List<int> api_saku {get; set;}
-	    public List<int> api_sakb {get; set;}
-	    public List<int> api_luck {get; set;}
+	    public List<int> api_taik = new List<int>();
+	    public List<int> api_souk = new List<int>();
+	    public List<int> api_tous = new List<int>();
+	    public List<int> api_houg = new List<int>();
+	    public List<int> api_raig = new List<int>();
+	    public List<int> api_baku = new List<int>();
+	    public List<int> api_tyku = new List<int>();
+	    public List<int> api_atap = new List<int>();
+	    public List<int> api_tais = new List<int>();
+	    public List<int> api_houm = new List<int>();
+	    public List<int> api_raim = new List<int>();
+	    public List<int> api_kaih = new List<int>();
+	    public List<int> api_houk = new List<int>();
+	    public List<int> api_raik = new List<int>();
+	    public List<int> api_bakk = new List<int>();
+	    public List<int> api_saku = new List<int>();
+	    public List<int> api_sakb = new List<int>();
+	    public List<int> api_luck = new List<int>();
 	    public int api_sokuh {get; set;}
 	    public int api_soku {get; set;}
-	    public int api_leng {get; set;}
-	    public List<int> api_grow {get; set;}
-	    public int api_slot_num {get; set;}
-	    public List<int> api_maxeq {get; set;}
-	    public List<int> api_defeq {get; set;}
-	    public int api_buildtime {get; set;}
-	    public List<int> api_broken {get; set;}
-	    public List<int> api_powup {get; set;}
-	    public List<int> api_gumax {get; set;}
+        public int api_leng { get; set; }
+        public List<int> api_grow = new List<int>();
+        public int api_slot_num {get; set;}
+        public List<int> api_maxeq = new List<int>();
+        public List<int> api_defeq = new List<int>();
+        public int api_buildtime {get; set;}
+        public List<int> api_broken = new List<int>();
+        public List<int> api_powup = new List<int>();
+        public List<int> api_gumax = new List<int>();
 	    public int api_backs {get; set;}
 	    public string api_getmes {get; set;}
 	    public string api_homemes {get; set;}  //o
@@ -628,7 +629,7 @@ namespace KanPlayWPF.KanData
 	    public string api_sinfo {get; set;}
 	    public int api_afterfuel {get; set;}
 	    public int api_afterbull {get; set;}
-	    public List<string> api_touchs {get; set;} //o
+	    public List<string> api_touchs = new List<string>(); //o
 	    public string api_missions {get; set;} //o
 	    public string api_systems {get; set;}  //o
 	    public int api_fuel_max {get; set;}
@@ -766,29 +767,29 @@ namespace KanPlayWPF.KanData
 	    public int api_sortno {get; set;}
 	    public int api_ship_id {get; set;}
 	    public int api_lv {get; set;}
-	    public List<int> api_exp {get; set;}
+	    public List<int> api_exp = new List<int>();
 	    public int api_nowhp {get; set;}
 	    public int api_maxhp {get; set;}
 	    public int api_leng {get; set;}	// short .. super long
-	    public List<int> api_slot {get; set;}
-	    public List<int> api_onslot {get; set;}
-	    public List<int> api_kyouka {get; set;}
+	    public List<int> api_slot = new List<int>();
+	    public List<int> api_onslot = new List<int>();
+	    public List<int> api_kyouka = new List<int>();
 	    public int api_backs {get; set;}
 	    public int api_fuel {get; set;}
 	    public int api_bull {get; set;}
 	    public int api_slotnum {get; set;}
-	    public Int64 api_ndock_time {get; set;}
-	    public List<int> api_ndock_item {get; set;} // fuel bull.ndock
+        public Int64 api_ndock_time = new Int64();
+	    public List<int> api_ndock_item = new List<int>(); // fuel bull.ndock
 	    public int api_srate {get; set;}	// normal .. ss
-	    public int api_cond {get; set;}
-	    public List<int> api_karyoku {get; set;}
-	    public List<int> api_raisou {get; set;}
-	    public List<int> api_taiku {get; set;}
-	    public List<int> api_soukou {get; set;}
-	    public List<int> api_kaihi {get; set;}
-	    public List<int> api_taisen {get; set;}
-	    public List<int> api_sakuteki {get; set;}
-	    public List<int> api_lucky {get; set;}
+        public int api_cond {get; set;}
+        public List<int> api_karyoku = new List<int>();
+        public List<int> api_raisou = new List<int>();
+        public List<int> api_taiku = new List<int>();
+        public List<int> api_soukou = new List<int>();
+        public List<int> api_kaihi = new List<int>();
+        public List<int> api_taisen = new List<int>();
+        public List<int> api_sakuteki = new List<int>();
+        public List<int> api_lucky = new List<int>();
 	    public int api_locked {get; set;}
 	    public int api_locked_equip {get; set;}
 	    public int api_sally_area {get; set;}
@@ -799,15 +800,13 @@ namespace KanPlayWPF.KanData
      */
     public class kcsapi_kdock_getship : KAPIBaseData
     {
-
-
 	    public kcsapi_kdock_getship(){}
 
 	    public int api_id {get; set;}
 	    public int api_ship_id {get; set;}
-	    public List<kcsapi_kdock> api_kdock {get; set;}
-	    public kcsapi_ship2 api_ship {get; set;}
-	    public List<kcsapi_slotitem> api_slotitem {get; set;}
+	    public List<kcsapi_kdock> api_kdock = new List<kcsapi_kdock>();
+	    public kcsapi_ship2 api_ship = new kcsapi_ship2();
+        public List<kcsapi_slotitem> api_slotitem = new List<kcsapi_slotitem>();
     }
 
     /**
@@ -815,8 +814,6 @@ namespace KanPlayWPF.KanData
      */
     public class kcsapi_material: KAPIBaseData
     {
-
-
 	    public kcsapi_material(){}
 
 	    public int api_member_id {get; set;}
@@ -834,8 +831,8 @@ namespace KanPlayWPF.KanData
 
 	    public int api_id {get; set;}
 	    public int api_sortno {get; set;}
-	    public string api_name {get; set;}
-	    public List<int> api_type {get; set;}
+        public string api_name { get; set; }
+        public List<int> api_type = new List<int>();
 	    public int api_taik {get; set;}
 	    public int api_souk {get; set;}
 	    public int api_houg {get; set;}
@@ -854,8 +851,8 @@ namespace KanPlayWPF.KanData
 	    public int api_sakb {get; set;}
 	    public int api_luck {get; set;}
 	    public int api_leng {get; set;}
-	    public int api_rare {get; set;}
-	    public List<int> api_broken {get; set;}
+        public int api_rare {get; set;}
+        public List<int> api_broken = new List<int>();
 	    public string api_info {get; set;}
 	    public string api_usebull {get; set;}
     }
@@ -898,7 +895,7 @@ namespace KanPlayWPF.KanData
 	    public int api_usetype {get; set;}
 	    public int api_category {get; set;}
 	    public string api_name {get; set;}
-	    public List<string> api_description {get; set;}
+        public List<string> api_description = new List<string>();
 	    public int api_price {get; set;}
     }
 
@@ -913,7 +910,7 @@ namespace KanPlayWPF.KanData
 	    public int api_id {get; set;}
 	    public int api_state {get; set;}
 	    public int api_ship_id {get; set;}
-	    public Int64 api_complete_time {get; set;}
+        public Int64 api_complete_time = new Int64();
 	    public string api_complete_time_str {get; set;}
 	    public int api_item1 {get; set;}
 	    public int api_item2 {get; set;}
@@ -930,8 +927,8 @@ namespace KanPlayWPF.KanData
 	    public kcsapi_powerup(){}
 	    
 	    public int api_powerup_flag {get; set;}
-	    public kcsapi_ship2 api_ship {get; set;}
-	    public List<kcsapi_deck> api_deck {get; set;}
+	    public kcsapi_ship2 api_ship = new kcsapi_ship2();
+        public List<kcsapi_deck> api_deck = new List<kcsapi_deck>();
     }
 
     public class kcsapi_clearitemget_bounus_item : KAPIBaseData
@@ -949,7 +946,7 @@ namespace KanPlayWPF.KanData
 	    public int api_type {get; set;}
 	    public int api_count {get; set;}
 	    //TODO: check ship
-	    public kcsapi_clearitemget_bounus_item api_item {get; set;}
+        public kcsapi_clearitemget_bounus_item api_item = new kcsapi_clearitemget_bounus_item();
     }
     /************************************************************************/
     /*                                                                      */
@@ -958,9 +955,9 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_clearitemget(){}
 
-	    public List<int> api_material {get; set;}
+        public List<int> api_material = new List<int>();
 	    public int api_bounus_count {get; set;}
-	    public List<kcsapi_clearitemget_bounus> api_bounus {get; set;}
+        public List<kcsapi_clearitemget_bounus> api_bounus = new List<kcsapi_clearitemget_bounus>();
     }
 
 
@@ -976,8 +973,8 @@ namespace KanPlayWPF.KanData
 	    public int api_type {get; set;}
 	    public int api_state {get; set;}
 	    public string api_title {get; set;}
-	    public string api_detail {get; set;}
-	    public List<int> api_get_material {get; set;}
+        public string api_detail { get; set; }
+        public List<int> api_get_material = new List<int>();
 	    public int api_bonus_flag {get; set;}
 	    public int api_progress_flag {get; set;}
     }
@@ -992,7 +989,7 @@ namespace KanPlayWPF.KanData
 	    public int api_count {get; set;}
 	    public int api_page_count {get; set;}
 	    public int api_disp_page {get; set;}
-	    public List<kcsapi_quest> api_list {get; set;}
+        public List<kcsapi_quest> api_list = new List<kcsapi_quest>();
 	    public int api_exec_count {get; set;}
     }
 
@@ -1004,11 +1001,11 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_ship3(){}
 
-	    public List<kcsapi_ship2> api_ship_data {get; set;}
-	    public List<kcsapi_deck> api_deck_data {get; set;}
+	    public List<kcsapi_ship2> api_ship_data = new List<kcsapi_ship2>();
+        public List<kcsapi_deck> api_deck_data = new List<kcsapi_deck>();
 
 	    //
-	    //public kcsapi_slot_data api_slot_data {get; set;}
+	    //public kcsapi_slot_data api_slot_data = new
     }
 
     /**
@@ -1018,58 +1015,58 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_ship_deck(){}
 
-	    public List<kcsapi_ship2> api_ship_data {get; set;}
-	    public List<kcsapi_deck> api_deck_data {get; set;}
+	    public List<kcsapi_ship2> api_ship_data = new List<kcsapi_ship2>();
+        public List<kcsapi_deck> api_deck_data = new List<kcsapi_deck>();
     }
 
     public class kcsapi_slot_data: KAPIBaseData
     {
 	    public kcsapi_slot_data(){}
 
-	    public List<int> api_slottype1 {get; set;}
-	    public List<int> api_slottype2 {get; set;}
-	    public List<int> api_slottype3 {get; set;}
-	    public List<int> api_slottype4 {get; set;}
-	    public List<int> api_slottype5 {get; set;}
-	    public List<int> api_slottype6 {get; set;}
-	    public List<int> api_slottype7 {get; set;}
-	    public List<int> api_slottype8 {get; set;}
-	    public List<int> api_slottype9 {get; set;}
-	    public List<int> api_slottype10 {get; set;}
-	    public List<int> api_slottype11 {get; set;}
-	    public List<int> api_slottype12 {get; set;}
-	    public List<int> api_slottype13 {get; set;}
-	    public List<int> api_slottype14 {get; set;}
-	    public List<int> api_slottype15 {get; set;}
-	    public List<int> api_slottype16 {get; set;}
-	    public List<int> api_slottype17 {get; set;}
-	    public List<int> api_slottype18 {get; set;}
-	    public List<int> api_slottype19 {get; set;}
-	    public List<int> api_slottype20 {get; set;}
-	    public List<int> api_slottype21 {get; set;}
-	    public List<int> api_slottype22 {get; set;}
-	    public List<int> api_slottype23 {get; set;}
-	    public List<int> api_slottype24 {get; set;}
-	    public List<int> api_slottype25 {get; set;}
-	    public List<int> api_slottype26 {get; set;}
-	    public List<int> api_slottype27 {get; set;}
-	    public List<int> api_slottype28 {get; set;}
-	    public List<int> api_slottype29 {get; set;}
-	    public List<int> api_slottype30 {get; set;}
-	    public List<int> api_slottype31 {get; set;}
-	    public List<int> api_slottype32 {get; set;}
-	    public List<int> api_slottype33 {get; set;}
-	    public List<int> api_slottype34 {get; set;}
-	    public List<int> api_slottype35 {get; set;}
-	    public List<int> api_slottype36 {get; set;}
+        public List<int> api_slottype1 = new List<int>();
+        public List<int> api_slottype2 = new List<int>();
+        public List<int> api_slottype3 = new List<int>();
+        public List<int> api_slottype4 = new List<int>();
+        public List<int> api_slottype5 = new List<int>();
+        public List<int> api_slottype6 = new List<int>();
+        public List<int> api_slottype7 = new List<int>();
+        public List<int> api_slottype8 = new List<int>();
+        public List<int> api_slottype9 = new List<int>();
+        public List<int> api_slottype10 = new List<int>();
+        public List<int> api_slottype11 = new List<int>();
+        public List<int> api_slottype12 = new List<int>();
+        public List<int> api_slottype13 = new List<int>();
+        public List<int> api_slottype14 = new List<int>();
+        public List<int> api_slottype15 = new List<int>();
+        public List<int> api_slottype16 = new List<int>();
+        public List<int> api_slottype17 = new List<int>();
+        public List<int> api_slottype18 = new List<int>();
+        public List<int> api_slottype19 = new List<int>();
+        public List<int> api_slottype20 = new List<int>();
+        public List<int> api_slottype21 = new List<int>();
+        public List<int> api_slottype22 = new List<int>();
+        public List<int> api_slottype23 = new List<int>();
+        public List<int> api_slottype24 = new List<int>();
+        public List<int> api_slottype25 = new List<int>();
+        public List<int> api_slottype26 = new List<int>();
+        public List<int> api_slottype27 = new List<int>();
+        public List<int> api_slottype28 = new List<int>();
+        public List<int> api_slottype29 = new List<int>();
+        public List<int> api_slottype30 = new List<int>();
+        public List<int> api_slottype31 = new List<int>();
+        public List<int> api_slottype32 = new List<int>();
+        public List<int> api_slottype33 = new List<int>();
+        public List<int> api_slottype34 = new List<int>();
+        public List<int> api_slottype35 = new List<int>();
+        public List<int> api_slottype36 = new List<int>();
     }
 
     public class Api_Mst_Item_Shop: KAPIBaseData
     {
 	    public Api_Mst_Item_Shop(){}
 
-	    public List<int> api_cabinet_1 {get; set;}
-	    public List<int> api_cabinet_2 {get; set;}
+        public List<int> api_cabinet_1 = new List<int>();
+        public List<int> api_cabinet_2 = new List<int>();
     }
 
     public class Api_Boko_Max_Ships: KAPIBaseData
@@ -1084,7 +1081,7 @@ namespace KanPlayWPF.KanData
     {
 	    public Api_Mst_Const(){}
 
-	    public Api_Boko_Max_Ships api_boko_max_ships {get; set;}
+        public Api_Boko_Max_Ships api_boko_max_ships = new Api_Boko_Max_Ships();
     }
 
 
@@ -1101,36 +1098,36 @@ namespace KanPlayWPF.KanData
 	    public int api_cnum {get; set;}
 	    public string api_enqflg {get; set;}
 	    public int api_afterlv {get; set;}
-	    public string api_aftershipid {get; set;}
-	    public List<int> api_taik {get; set;}
-	    public List<int> api_souk {get; set;}
-	    public List<int> api_tous {get; set;}
-	    public List<int> api_houg {get; set;}
-	    public List<int> api_raig {get; set;}
-	    public List<int> api_baku {get; set;}
-	    public List<int> api_tyku {get; set;}
-	    public List<int> api_atap {get; set;}
-	    public List<int> api_tais {get; set;}
-	    public List<int> api_houm {get; set;}
-	    public List<int> api_raim {get; set;}
-	    public List<int> api_kaih {get; set;}
-	    public List<int> api_houk {get; set;}
-	    public List<int> api_raik {get; set;}
-	    public List<int> api_bakk {get; set;}
-	    public List<int> api_saku {get; set;}
-	    public List<int> api_sakb {get; set;}
-	    public List<int> api_luck {get; set;}
+        public string api_aftershipid { get; set; }
+        public List<int> api_taik = new List<int>();
+        public List<int> api_souk = new List<int>();
+        public List<int> api_tous = new List<int>();
+        public List<int> api_houg = new List<int>();
+        public List<int> api_raig = new List<int>();
+        public List<int> api_baku = new List<int>();
+        public List<int> api_tyku = new List<int>();
+        public List<int> api_atap = new List<int>();
+        public List<int> api_tais = new List<int>();
+        public List<int> api_houm = new List<int>();
+        public List<int> api_raim = new List<int>();
+        public List<int> api_kaih = new List<int>();
+        public List<int> api_houk = new List<int>();
+        public List<int> api_raik = new List<int>();
+        public List<int> api_bakk = new List<int>();
+        public List<int> api_saku = new List<int>();
+        public List<int> api_sakb = new List<int>();
+        public List<int> api_luck = new List<int>();
 	    public int api_sokuh {get; set;}
 	    public int api_soku {get; set;}
 	    public int api_leng {get; set;}
-	    public List<int> api_grow {get; set;}
-	    public int api_slot_num {get; set;}
-	    public List<int> api_maxeq {get; set;}
-	    public List<int> api_defeq {get; set;}
-	    public int api_buildtime {get; set;}
-	    public List<int> api_broken {get; set;}
-	    public List<int> api_powup {get; set;}
-	    public List<int> api_gumax {get; set;}
+	    public List<int> api_grow = new List<int>();
+        public int api_slot_num { get; set; }
+        public List<int> api_maxeq = new List<int>();
+        public List<int> api_defeq = new List<int>();
+        public int api_buildtime { get; set; }
+        public List<int> api_broken = new List<int>();
+        public List<int> api_powup = new List<int>();
+        public List<int> api_gumax = new List<int>();
 	    public int api_backs {get; set;}
 	    public string api_getmes {get; set;}
 	    public string api_homemes {get; set;} //o
@@ -1139,7 +1136,7 @@ namespace KanPlayWPF.KanData
 	    public string api_sinfo {get; set;}
 	    public int api_afterfuel {get; set;}
 	    public int api_afterbull {get; set;}
-	    public List<string> api_touchs {get; set;} //o[ ]
+        public List<string> api_touchs = new List<string>(); //o[ ]
 	    public string api_missions {get; set;} //o
 	    public string api_systems {get; set;} //o
 	    public int api_fuel_max {get; set;}
@@ -1154,22 +1151,22 @@ namespace KanPlayWPF.KanData
 	    public int api_id {get; set;}
 	    public int api_sortno {get; set;}
 	    public string api_filename {get; set;}
-	    public string api_version {get; set;}
-	    public List<int> api_boko_n {get; set;}
-	    public List<int> api_boko_d {get; set;}
-	    public List<int> api_kaisyu_n {get; set;}
-	    public List<int> api_kaisyu_d {get; set;}
-	    public List<int> api_kaizo_n {get; set;}
-	    public List<int> api_kaizo_d {get; set;}
-	    public List<int> api_map_n {get; set;}
-	    public List<int> api_map_d {get; set;}
-	    public List<int> api_ensyuf_n {get; set;}
-	    public List<int> api_ensyuf_d {get; set;}
-	    public List<int> api_ensyue_n {get; set;}
-	    public List<int> api_battle_n {get; set;}
-	    public List<int> api_battle_d {get; set;}
-	    public List<int> api_weda {get; set;}
-	    public List<int> api_wedb {get; set;}
+        public string api_version {get; set;}
+        public List<int> api_boko_n = new List<int>();
+        public List<int> api_boko_d = new List<int>();
+        public List<int> api_kaisyu_n = new List<int>();
+        public List<int> api_kaisyu_d = new List<int>();
+        public List<int> api_kaizo_n = new List<int>();
+        public List<int> api_kaizo_d = new List<int>();
+        public List<int> api_map_n = new List<int>();
+        public List<int> api_map_d = new List<int>();
+        public List<int> api_ensyuf_n = new List<int>();
+        public List<int> api_ensyuf_d = new List<int>();
+        public List<int> api_ensyue_n = new List<int>();
+        public List<int> api_battle_n = new List<int>();
+        public List<int> api_battle_d = new List<int>();
+        public List<int> api_weda = new List<int>();
+        public List<int> api_wedb = new List<int>();
     }
 
     public class Api_Equip_Type: KAPIBaseData
@@ -1218,7 +1215,7 @@ namespace KanPlayWPF.KanData
 	    public string api_name {get; set;}
 	    public int api_scnt {get; set;}
 	    public int api_kcnt {get; set;}
-	    public Api_Equip_Type api_equip_type {get; set;}
+        public Api_Equip_Type api_equip_type = new Api_Equip_Type();
     }
 
     public class Api_Mst_Slotitem: KAPIBaseData
@@ -1227,8 +1224,8 @@ namespace KanPlayWPF.KanData
 
 	    public int api_id {get; set;}
 	    public int api_sortno {get; set;}
-	    public string api_name {get; set;}
-	    public List<int> api_type {get; set;}
+        public string api_name { get; set; }
+        public List<int> api_type = new List<int>();
 	    public int api_taik {get; set;}
 	    public int api_souk {get; set;}
 	    public int api_houg {get; set;}
@@ -1248,7 +1245,7 @@ namespace KanPlayWPF.KanData
 	    public int api_luck {get; set;}
 	    public int api_leng {get; set;}
 	    public int api_rare {get; set;}
-	    public List<int> api_broken {get; set;}
+	    public List<int> api_broken = new List<int>();
 	    public string api_info {get; set;}
 	    public string api_usebull {get; set;}
     }
@@ -1296,7 +1293,7 @@ namespace KanPlayWPF.KanData
 	    public int api_usetype {get; set;}
 	    public int api_category {get; set;}
 	    public string api_name {get; set;}
-	    public List<string> api_description {get; set;}
+        public List<string> api_description = new List<string>();
 	    public int api_price {get; set;}
     }
 
@@ -1308,7 +1305,7 @@ namespace KanPlayWPF.KanData
 	    public int api_type {get; set;}
 	    public string api_name {get; set;}
 	    public string api_description {get; set;}
-	    public List<int> api_item {get; set;}
+	    public List<int> api_item = new List<int>();
 	    public int api_price {get; set;}
     }
 
@@ -1333,9 +1330,9 @@ namespace KanPlayWPF.KanData
 	    public string api_name {get; set;}
 	    public int api_level {get; set;}
 	    public string api_opetext {get; set;}
-	    public string api_infotext {get; set;}
-	    public List<int> api_item {get; set;}
-	    public Int32 api_max_maphp {get; set;}
+        public string api_infotext { get; set; }
+        public List<int> api_item = new List<int>();
+	    public int api_max_maphp {get; set;}
 	    public int api_required_defeat_count {get; set;}
 	    // "api_sally_flag":[1,0]
     }
@@ -1346,9 +1343,9 @@ namespace KanPlayWPF.KanData
 
 	    public int api_id {get; set;}
 	    public int api_maparea_id {get; set;}
-	    public int api_no {get; set;}
-	    public List<int> api_map_bgm {get; set;}
-	    public List<int> api_boss_bgm {get; set;}
+        public int api_no { get; set; }
+        public List<int> api_map_bgm = new List<int>();
+        public List<int> api_boss_bgm = new List<int>();
     }
 
     public class Api_Mst_Mapcell: KAPIBaseData
@@ -1374,9 +1371,9 @@ namespace KanPlayWPF.KanData
 	    public int api_time {get; set;}
 	    public int api_difficulty {get; set;}
 	    public float api_use_fuel {get; set;}
-	    public float api_use_bull {get; set;}
-	    public List<int> api_win_item1 {get; set;}
-	    public List<int> api_win_item2 {get; set;}
+        public float api_use_bull {get; set;}
+        public List<int> api_win_item1 = new List<int>();
+        public List<int> api_win_item2 = new List<int>();
 	    // "api_return_flag":1
     }
 
@@ -1398,27 +1395,27 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_start2(){}
 
-	    public List<kcsapi_mst_ship> api_mst_ship {get; set;}
-        public List<kcsapi_mst_slotitem> api_mst_slotitem {get; set;}
-        public List<kcsapi_mst_useitem> api_mst_useitem {get; set;}
-        public List<kcsapi_mst_stype> api_mst_stype {get; set;}
-	    public List<kcsapi_mst_slotitem_equiptype> api_mst_slotitem_equiptype {get; set;}
+	    public List<kcsapi_mst_ship> api_mst_ship = new List<kcsapi_mst_ship>();
+        public List<kcsapi_mst_slotitem> api_mst_slotitem = new List<kcsapi_mst_slotitem>();
+        public List<kcsapi_mst_useitem> api_mst_useitem = new List<kcsapi_mst_useitem>();
+        public List<kcsapi_mst_stype> api_mst_stype = new List<kcsapi_mst_stype>();
+	    public List<kcsapi_mst_slotitem_equiptype> api_mst_slotitem_equiptype = new List<kcsapi_mst_slotitem_equiptype>();
 
 	    // Keep
 
-	    public List<Api_Mst_Shipgraph> api_mst_shipgraph {get; set;}
-	    public List<Api_Mst_Slotitemgraph> api_mst_slotitemgraph {get; set;}
-	    public List<Api_Mst_Furniture> api_mst_furniture {get; set;}
-	    public List<Api_Mst_Furnituregraph> api_mst_furnituregraph {get; set;}
-	    public List<Api_Mst_Payitem> api_mst_payitem {get; set;}
-	    public Api_Mst_Item_Shop api_mst_item_shop {get; set;}
-	    public List<Api_Mst_Maparea> api_mst_maparea {get; set;}
-	    public List<Api_Mst_Mapinfo> api_mst_mapinfo {get; set;}
-	    public List<Api_Mst_Mapbgm> api_mst_mapbgm {get; set;}
-	    public List<Api_Mst_Mapcell> api_mst_mapcell {get; set;}
-	    public List<Api_Mst_Mission> api_mst_mission {get; set;}
-	    public List<Api_Mst_Const> api_mst_const {get; set;}
-	    public List<Api_Mst_Shipupgrade> api_mst_shipupgrade {get; set;}
+	    public List<Api_Mst_Shipgraph> api_mst_shipgraph = new List<Api_Mst_Shipgraph>();
+	    public List<Api_Mst_Slotitemgraph> api_mst_slotitemgraph = new List<Api_Mst_Slotitemgraph>();
+	    public List<Api_Mst_Furniture> api_mst_furniture = new List<Api_Mst_Furniture>();
+	    public List<Api_Mst_Furnituregraph> api_mst_furnituregraph = new List<Api_Mst_Furnituregraph>();
+	    public List<Api_Mst_Payitem> api_mst_payitem = new List<Api_Mst_Payitem>();
+	    public Api_Mst_Item_Shop api_mst_item_shop = new Api_Mst_Item_Shop();
+	    public List<Api_Mst_Maparea> api_mst_maparea = new List<Api_Mst_Maparea>();
+	    public List<Api_Mst_Mapinfo> api_mst_mapinfo = new List<Api_Mst_Mapinfo>();
+	    public List<Api_Mst_Mapbgm> api_mst_mapbgm = new List<Api_Mst_Mapbgm>();
+	    public List<Api_Mst_Mapcell> api_mst_mapcell = new List<Api_Mst_Mapcell>();
+	    public List<Api_Mst_Mission> api_mst_mission = new List<Api_Mst_Mission>();
+	    public List<Api_Mst_Const> api_mst_const = new List<Api_Mst_Const>();
+        public List<Api_Mst_Shipupgrade> api_mst_shipupgrade = new List<Api_Mst_Shipupgrade>();
     }
 
     /**
@@ -1428,12 +1425,25 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_port(){}
 
-	    public List<kcsapi_material> api_material {get; set;}
-	    public List<kcsapi_deck> api_deck_port {get; set;}
-	    public List<kcsapi_ndock> api_ndock {get; set;}
-	    public List<kcsapi_ship2> api_ship {get; set;}
-	    public kcsapi_basic api_basic {get; set;}
-	    //public Api_Log[ ] api_log {get; set;}
+        public List<kcsapi_material> api_material = new List<kcsapi_material>() 
+        { 
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+            new kcsapi_material(),
+        };
+	    public List<kcsapi_deck> api_deck_port = new List<kcsapi_deck>();
+	    public List<kcsapi_ndock> api_ndock = new List<kcsapi_ndock>();
+	    public List<kcsapi_ship2> api_ship = new List<kcsapi_ship2>();
+        public kcsapi_basic api_basic = new kcsapi_basic();
+	    //public Api_Log[ ] api_log = new
     }
 
     /**
@@ -1449,7 +1459,7 @@ namespace KanPlayWPF.KanData
 	    public int api_usetype {get; set;}
 	    public int api_category {get; set;}
 	    public string api_name {get; set;}
-	    public List<string> api_description {get; set;}
+	    public List<string> api_description = new List<string>();
 	    public int api_price {get; set;}
 	    public int api_count {get; set;}
     }
@@ -1483,7 +1493,7 @@ namespace KanPlayWPF.KanData
 	    public int api_bosscomp {get; set;}
     //    int api_comment_kind {get; set;}
     //    int api_production_kind {get; set;}
-	    public kcsapi_next_enemy api_enemy {get; set;}
+	    public kcsapi_next_enemy api_enemy = new kcsapi_next_enemy();
     }
 
     /**
@@ -1493,7 +1503,7 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_mission_start(){}
 
-	    public Int64 api_complatetime {get; set;}
+	    public Int64 api_complatetime = new Int64();
 	    public string api_complatetime_str {get; set;}
 
     }
@@ -1524,11 +1534,11 @@ namespace KanPlayWPF.KanData
     {
 	    public kcsapi_remodel_slot(){}
 
-	    public int api_remodel_flag {get; set;}
-	    public List<int> api_remodel_id {get; set;}
-	    public List<int> api_after_material {get; set;}
+        public int api_remodel_flag { get; set; }
+        public List<int> api_remodel_id = new List<int>();
+        public List<int> api_after_material = new List<int>();
 	    public int api_voice_id {get; set;}
-	    public kcsapi_slotitem api_after_slot {get; set;}
+	    public kcsapi_slotitem api_after_slot = new kcsapi_slotitem();
     }
 
 }

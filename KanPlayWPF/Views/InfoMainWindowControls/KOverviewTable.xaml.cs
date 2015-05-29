@@ -23,13 +23,15 @@ namespace KanPlayWPF.Views.InfoMainWindowControls
     /// </summary>
     public partial class KOverviewTable : UserControl
     {
-        private KOverviewTableViewModel _overviewTableVM = new KOverviewTableViewModel();
+        public KOverviewTableViewModel overviewTableVM {get; set;}
+
         private int _minLeftColumnWidth = 175;
 
         public KOverviewTable()
         {
             InitializeComponent();
-            overviewTableListView.Items.Add(_overviewTableVM);
+            overviewTableVM = new KOverviewTableViewModel();
+            overviewTableListView.Items.Add(overviewTableVM);
 
             ((System.ComponentModel.INotifyPropertyChanged)gridViewColumn0).PropertyChanged += (sender, e) =>
             {
