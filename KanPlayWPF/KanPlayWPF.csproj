@@ -94,6 +94,7 @@
     <Compile Include="KanData\KanVMUpdater.cs" />
     <Compile Include="Models\DebugModel.cs" />
     <Compile Include="Models\KanDataEnumModel.cs" />
+    <Compile Include="Models\MissionModel.cs" />
     <Compile Include="Models\ProgressBarModel.cs" />
     <Compile Include="ViewModels\TimerMainWindowViewModel.cs" />
     <Compile Include="ViewModels\TimerMainWindow\KTimerProgressViewModel.cs" />

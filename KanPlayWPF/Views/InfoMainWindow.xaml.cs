@@ -19,6 +19,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 
 using KanPlayWPF.ViewModels;
+using System.Windows.Threading;
 
 namespace KanPlayWPF.Views
 {
@@ -35,12 +36,12 @@ namespace KanPlayWPF.Views
     /// </summary>
     public partial class InfoMainWindow : KWindowBase
     {
-        private List<MissionTableViewModel> _missionTableItems = new List<MissionTableViewModel>();
-        private List<FleetTeamViewModel>  _fleetTables = new List<FleetTeamViewModel>();
-        private List<RepairTableViewModel> _repairTableItems = new List<RepairTableViewModel>();
-        private MainWindow _mainWindow = null;
+        private List<MissionTableViewModel> _missionTableVMs = new List<MissionTableViewModel>(); public List<MissionTableViewModel> missionTableVMs { get { return _missionTableVMs; } set { _missionTableVMs = value; } }
+        private List<FleetTeamViewModel> _fleetTableVMs = new List<FleetTeamViewModel>(); public List<FleetTeamViewModel> fleetTableVMs { get { return _fleetTableVMs; } set { _fleetTableVMs = value; } }
+        private List<RepairTableViewModel> _repairTableVMs = new List<RepairTableViewModel>(); public List<RepairTableViewModel> repairTableVMs { get { return _repairTableVMs; } set { _repairTableVMs = value; } }
 
-        private InfoMainWindowViewModel _infoMainWindowVM = new InfoMainWindowViewModel();
+        private MainWindow _mainWindow = null;
+        private InfoMainWindowViewModel _infoMainWindowVM = new InfoMainWindowViewModel(); public InfoMainWindowViewModel infoMainWindowVM { get { return _infoMainWindowVM; } set { _infoMainWindowVM = value; } }
         
         public KOverviewTableViewModel getOverViewTableVM()
         {
@@ -91,20 +92,31 @@ namespace KanPlayWPF.Views
 
         private void KWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
+            //BindingOperations.EnableCollectionSynchronization(this._missionTableVMs, new object());
+            //BindingOperations.EnableCollectionSynchronization(this._fleetTableVMs, new object());
+            //BindingOperations.EnableCollectionSynchronization(this._repairTableVMs, new object());
+
             #region MissionTableColumns
             missionTable.foldableListView.Style = Application.Current.FindResource("KMissionTableListViewDefine") as Style;
 
             missionTable.setExpandableColumn(1);
 
             missionTable.toggleButton.Style = Application.Current.FindResource("KMissionTableToggleButtonDefine") as Style;
-            missionTable.toggleButton.DataContext = _infoMainWindowVM;
+            missionTable.toggleButton.DataContext = infoMainWindowVM;
 
-            _infoMainWindowVM.missionCount = 4;
+            //infoMainWindowVM.missionCount = 4;
 
             #region SampleData
-            MissionTableViewModel item = new MissionTableViewModel() { missionName = "abc", progress = 5 };
-            _missionTableItems.Add(item);
-            missionTable.setItemSource(_missionTableItems);
+            //MissionTableViewModel item = new MissionTableViewModel() { missionName = "abc", progress = "5" };
+            //missionTableVMs.Add(item); 
+            //item = new MissionTableViewModel() { missionName = "abcaa", progress = "5" };
+            //_missionTableVMs.Add(item); item = new MissionTableViewModel() { missionName = "abc", progress = "5" };
+            //missionTableVMs.Add(item); item = new MissionTableViewModel() { missionName = "abc", progress = "5" };
+            //missionTableVMs.Add(item); item = new MissionTableViewModel() { missionName = "abc", progress = "5" };
+            //missionTableVMs.Add(item); item = new MissionTableViewModel() { missionName = "abcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", progress = "500" };
+            //missionTableVMs.Add(item);
+            missionTable.setItemSource(missionTableVMs);
+            //BindingOperations.EnableCollectionSynchronization(this._missionTableVMs, new object());
             #endregion
 
             #endregion
@@ -116,13 +128,13 @@ namespace KanPlayWPF.Views
             fleetTables.Add(fleetTable_3);
             fleetTables.Add(fleetTable_4);
 
-            _fleetTables.Add(new FleetTeamViewModel());
-            _fleetTables.Add(new FleetTeamViewModel());
-            _fleetTables.Add(new FleetTeamViewModel());
-            _fleetTables.Add(new FleetTeamViewModel());
+            fleetTableVMs.Add(new FleetTeamViewModel());
+            fleetTableVMs.Add(new FleetTeamViewModel());
+            fleetTableVMs.Add(new FleetTeamViewModel());
+            fleetTableVMs.Add(new FleetTeamViewModel());
 
             #region SampleData
-            _fleetTables[0].AddVM(new FleetTableViewModel()
+            fleetTableVMs[0].AddVM(new FleetTableViewModel()
             {
                 index = 1,
                 shipName = "aaa",
@@ -136,7 +148,7 @@ namespace KanPlayWPF.Views
                 nowHp = 5,
                 maxHp = 80,
             });
-            _fleetTables[0].AddVM(new FleetTableViewModel()
+            fleetTableVMs[0].AddVM(new FleetTableViewModel()
             {
                 index = 2,
                 shipName = "bbb",
@@ -155,14 +167,14 @@ namespace KanPlayWPF.Views
             foreach (var it in fleetTables.Select((v, i) => new { v, i }))
             {
                 it.v.applyTableStyle("KFleetTableListViewDefine");
-                it.v.setItemSource(_fleetTables[it.i].shipsViewModel);
+                it.v.setItemSource(fleetTableVMs[it.i].shipsViewModel);
                 it.v.setExpandableColumn(3);
                 if (it.i != 0)
                 {
                     it.v.setFold(true);
                 }
 
-                it.v.toggleButton.DataContext = _fleetTables[it.i];
+                it.v.toggleButton.DataContext = fleetTableVMs[it.i];
                 it.v.toggleButton.Style = Application.Current.FindResource("KFleetTableToggleButtonDefine") as Style;
             }
             #endregion
@@ -171,13 +183,13 @@ namespace KanPlayWPF.Views
             repairTable.foldableListView.Style = Application.Current.FindResource("KRepairTableListViewDefine") as Style;
 
             repairTable.setExpandableColumn(3);
-            repairTable.setItemSource(_repairTableItems);
+            repairTable.setItemSource(repairTableVMs);
 
             repairTable.toggleButton.Style = Application.Current.FindResource("KRepairTableToggleButtonDefine") as Style;
-            repairTable.toggleButton.DataContext = _infoMainWindowVM;
+            repairTable.toggleButton.DataContext = infoMainWindowVM;
 
             #region SampleData
-            _repairTableItems.Add(new RepairTableViewModel()
+            repairTableVMs.Add(new RepairTableViewModel()
             {
                 shipName = "aaa",
                 level = 40,
@@ -190,6 +202,17 @@ namespace KanPlayWPF.Views
 
             #endregion
 
+
+
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1, 1);
+            dispatcherTimer.Start();
+        }
+
+        void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            (sender as DispatcherTimer).Stop();
         }
     }
 }

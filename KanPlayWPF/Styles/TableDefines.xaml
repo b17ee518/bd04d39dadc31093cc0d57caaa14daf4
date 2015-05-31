@@ -67,7 +67,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding missionName}">
                     </GridViewColumn>
                     <!-- "progress" -->
-                    <GridViewColumn DisplayMemberBinding="{Binding StringFormat=({0}%), Path=progress}">
+                    <GridViewColumn DisplayMemberBinding="{Binding progress}">
                     </GridViewColumn>
                 </GridView>
             </Setter.Value>

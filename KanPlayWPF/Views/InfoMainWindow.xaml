@@ -10,7 +10,7 @@
         xmlns:InfoMainWindowControls="clr-namespace:KanPlayWPF.Views.InfoMainWindowControls" 
     xmlns:KFoldableListView="clr-namespace:KanPlayWPF.Views.KFoldableListView" 
     x:Class="KanPlayWPF.Views.InfoMainWindow"
-        Title="InfoMainWindow" Height="224" Width="320"
+        Title="InfoMainWindow"
     Style="{StaticResource KMainWindowStyle}" MinWidth="320" MinHeight="224" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
     ShowInTaskbar="False"
     Loaded="KWindowBase_Loaded">
@@ -40,9 +40,9 @@
     </i:Interaction.Triggers>
 
     <Grid MinWidth="320" MinHeight="224">
-        <TextBox Height="20" Margin="20,0" TextWrapping="Wrap" Text="{Binding infoTitleText}" VerticalAlignment="Top" IsReadOnly="True"/>
+        <TextBox Margin="20,0" TextWrapping="Wrap" Text="{Binding infoTitleText}" VerticalAlignment="Top" IsReadOnly="True"/>
         <StackPanel>
-            <ControlBase:KTitleFrame Height="20" VerticalAlignment="Top" MinHeight="20" MaxHeight="20" MinWidth="320" Background="{StaticResource TitleBrush}">
+            <ControlBase:KTitleFrame VerticalAlignment="Top" MinHeight="20" MaxHeight="20" MinWidth="320" Background="{StaticResource TitleBrush}">
                 <Button Content="X" Style="{StaticResource KTitleButtonStyle}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Click="onCloseButtonClicked"/>
             </ControlBase:KTitleFrame>
             <InfoMainWindowControls:KOverviewTable x:Name="overviewTable" VerticalAlignment="Top"/>

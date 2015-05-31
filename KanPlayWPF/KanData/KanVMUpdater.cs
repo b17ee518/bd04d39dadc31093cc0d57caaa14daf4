@@ -1,4 +1,5 @@
 ﻿using KanPlayWPF.Models;
+using KanPlayWPF.ViewModels;
 using KanPlayWPF.ViewModels.InfoMainWindow;
 using KanPlayWPF.Views;
 using System;
@@ -28,6 +29,22 @@ namespace KanPlayWPF.KanData
             }
         }
         #endregion
+
+        private void resizeList<T>(int size, List<T> l)
+        {
+            int nowcount = l.Count;
+            if (size < nowcount)
+            {
+                l.RemoveRange(size, nowcount-size);
+            }
+            else if (size > nowcount)
+            {
+                for (int i=nowcount; i<size; i++)
+                { 
+                    l.Add((T)Activator.CreateInstance(typeof(T)));
+                }
+            }
+        }
 
         public void updateOverviewTable()
         {
@@ -84,12 +101,94 @@ namespace KanPlayWPF.KanData
         }
         public void updateMissionTable()
         { 
+            List<MissionTableViewModel> vms = MainWindow.getMainWindow().infoWindow.missionTableVMs;
+            InfoMainWindowViewModel infoVM = MainWindow.getMainWindow().infoWindow.infoMainWindowVM;
+
+	        KanSaveData pksd = KanSaveData.Instance;
+
+            int questcount = pksd.questdata.Count;
+            //if (questcount < vms.Count)
+            //{
+            //    vms.RemoveRange(questcount, vms.Count-questcount);
+            //}
+            //else if (questcount > vms.Count)
+            //{
+            //    int vmscount = vms.Count;
+            //    for (int i=vmscount; i<questcount; i++)
+            //    {
+            //        vms.Add(new MissionTableViewModel());
+            //    }
+            //}
+            resizeList<MissionTableViewModel>(questcount, vms);
+            
+            for (int i=0; i<questcount; i++)
+	        {
+                vms[i].missionName = pksd.questdata[i].api_title;
+                vms[i].missionTips = pksd.questdata[i].api_detail;
+                vms[i].progress = MissionModel.getMissionProgressStringFromValue(pksd.questdata[i].api_progress_flag, pksd.questdata[i].api_state);
+	        }
+            infoVM.missionCount = questcount;
         }
         public void updateRepairTable()
         { 
         }
         public void updateFleetTable() 
         {
+            List<FleetTeamViewModel> vms = MainWindow.getMainWindow().infoWindow.fleetTableVMs;
+	        KanSaveData pksd = KanSaveData.Instance;
+            KanDataConnector pkdc = KanDataConnector.Instance;
+            
+            int teamindex = 0;
+	        foreach (kcsapi_deck v in pksd.portdata.api_deck_port)
+	        {
+		        int shipcount = 0;
+
+		        foreach(int shipno in v.api_ship)
+		        {
+			        if (shipno <= 0)
+			        {
+				        break;
+			        }
+			        shipcount++;
+                }
+                resizeList<FleetTableViewModel>(shipcount, vms[teamindex].shipsViewModel);
+
+                int shipindex = 0;
+		        foreach(int shipno in v.api_ship)
+		        {
+			        if (shipno <= 0)
+			        {
+				        break;
+			        }
+
+			        kcsapi_ship2 pship = pkdc.findShipFromShipno(shipno);
+			        if (pship == null)
+			        {
+				        continue;
+			        }
+			        int shipid = pship.api_ship_id;
+			        kcsapi_mst_ship pmstship = pkdc.findMstShipFromShipid(shipid);
+            
+			        int nextexp = pship.api_exp[1];
+                    FleetTableViewModel shipvm = vms[teamindex].shipsViewModel[shipindex];
+                    shipvm.index = shipindex;
+                    shipvm.shipName = pmstship.api_name;
+                    shipvm.level = pship.api_lv;
+                    shipvm.cond = pship.api_cond;
+                    shipvm.nextExp = nextexp;
+                    shipvm.fuel = pship.api_fuel;
+                    shipvm.bullet = pship.api_bull;
+                    shipvm.fuelMax = pmstship.api_fuel_max;
+                    shipvm.bulletMax = pmstship.api_bull_max;
+                    shipvm.nowHp = pship.api_nowhp;
+                    shipvm.maxHp = pship.api_maxhp;
+                    // TODO
+                    shipvm.repairingState = ReparingState.None;
+
+                    shipindex++;
+		        }
+                teamindex++;
+	        }
         }
         public void updateExpeditionTable()
         { 

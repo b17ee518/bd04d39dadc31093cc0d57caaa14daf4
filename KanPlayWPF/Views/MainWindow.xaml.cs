@@ -72,6 +72,7 @@ namespace KanPlayWPF.Views
                 KanDataConnector.Instance.Parse(splited[i * 4 + 1], splited[i * 4 + 2], splited[i * 4 + 3]);
             }
              
+             
         }
 
         public void onInfoMainWindowClosed()
@@ -136,8 +137,9 @@ namespace KanPlayWPF.Views
             {
                 if (oSession.oResponse.MIMEType == "text/plain")
                 {
-                    string requestBody = System.Text.Encoding.UTF8.GetString(oSession.RequestBody);
-                    string responseBody = System.Text.Encoding.UTF8.GetString(oSession.ResponseBody);
+                    string requestBody = oSession.GetRequestBodyAsString();
+                    string responseBody = oSession.GetResponseBodyAsString();
+                    responseBody = responseBody.Remove(0, 7);
                     KanDataConnector.Instance.Parse(oSession.PathAndQuery, requestBody, responseBody);
                 }
             }

@@ -40,6 +40,7 @@ namespace KanPlayWPF.Views.InfoMainWindowControls
                     if (gridViewColumn0.ActualWidth < _minLeftColumnWidth)
                     {
                         gridViewColumn0.Width = _minLeftColumnWidth;
+                        gridViewColumn1.Width = overviewTableListView.ActualWidth - _minLeftColumnWidth - 8;
                     }
                 }
             };

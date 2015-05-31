@@ -36,19 +36,18 @@
         <StackPanel>
             <ToggleButton x:Name="toggleButton"
             Style="{StaticResource KToggleButtonStyle}" 
-                          Margin="20,0,0,0" VerticalAlignment="Top" Height="25" MinWidth="300" MinHeight="25" MaxHeight="25" Checked="onToggleButtonChecked" Unchecked="onToggleButtonUnchecked"/>
+                          Margin="20,0,0,0" VerticalAlignment="Top" MinWidth="300" MinHeight="25" MaxHeight="25" Checked="onToggleButtonChecked" Unchecked="onToggleButtonUnchecked"/>
             
             <ListView x:Name="foldableListView" MinHeight="0">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource {x:Type ListViewItem}}">
                         <Setter Property="Padding" Value="0,0,0,0"></Setter>
-                        <Setter Property="Margin" Value="0,0,0,-2" />
+                        <Setter Property="Margin" Value="0,0,0,0" />
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-                        <EventSetter Event="Loaded" Handler="ListViewItem_Loaded"></EventSetter>
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>

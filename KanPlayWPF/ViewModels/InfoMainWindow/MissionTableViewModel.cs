@@ -120,9 +120,9 @@ namespace KanPlayWPF.ViewModels.InfoMainWindow
         #endregion
 
         #region progress変更通知プロパティ
-        private int _progress;
+        private string _progress;
 
-        public int progress
+        public string progress
         {
             get
             { return _progress; }
